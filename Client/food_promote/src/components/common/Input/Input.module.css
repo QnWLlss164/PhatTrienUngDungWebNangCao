@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+}
+.container label {
+  text-align: start;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.form_group {
+  margin-bottom: 15px;
+  display: flex;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 4px 13.4px rgba(0, 0, 0, 25%);
+  padding: 10px 20px;
+}
+
+.form_group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form_group input {
+  width: 100%;
+  background-color: transparent;
+  padding: 8px 10px;
+  font-size: 18px;
+}
+.toggle_password {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
