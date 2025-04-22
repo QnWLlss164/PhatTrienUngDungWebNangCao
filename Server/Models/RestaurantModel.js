@@ -86,11 +86,10 @@ const restaurantSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    owners: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
+    location: {
+      type: String,
+      required: true
+    }
   },
   {
     timestamps: true,

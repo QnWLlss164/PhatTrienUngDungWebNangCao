@@ -81,7 +81,10 @@ const HomePage = () => {
                         </Link>
                     </div>
                 </div>
-                <PostList />
+                <div className={classes.postList}>
+
+                    <PostList />
+                </div>
             </div>
         </div>
     );

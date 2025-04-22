@@ -1,0 +1,60 @@
+.formContainer {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color 0.2s ease;
+}
+.star i {
+  color: #ffa629;
+}
+
+.starActive i {
+  color: #ffa629;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px;
+  resize: vertical;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #2c3930;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.button:hover {
+  background-color: #2c3930;
+}
+.error {
+  color: brown;
+}
+.comment_title {
+  color: #fcd19c;
+}

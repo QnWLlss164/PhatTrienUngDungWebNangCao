@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classes from './SearchBar.module.css'
 import iconSearch from '../../../assets/icon_search.png'
 
-function SearchBar({ onSearch }) {
-    const [query, setQuery] = useState("");
+function SearchBar({ defaultValue = "", onSearch }) {
+    const [query, setQuery] = useState(defaultValue);
 
     const handleChange = (e) => {
         setQuery(e.target.value);

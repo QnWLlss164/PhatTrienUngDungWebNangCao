@@ -1,12 +1,17 @@
 import React from 'react'
 import classes from './Post.module.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function PostItem(props) {
-  const { image_url, title, description, author, create_at } = props.data;
+  const { _id, image, title, description, author, createAt, updatedAt } = props.data;
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/blogsnnews/${_id}`);
+  };
   return (
-    <div className={`${classes.item_container}`}>
+    <div onClick={handleClick} className={`${classes.item_container}`}>
       <div style={{
-        backgroundImage: `url(${image_url})`,
+        backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
 
@@ -18,7 +23,8 @@ export default function PostItem(props) {
         <h1 className={classes.item_title}>{title}</h1>
         <div className={classes.item_author}>
           <p>
-            {create_at}<span>-</span>{author}
+
+            {new Date(createAt ? createAt : updatedAt).toLocaleDateString('vi-VN')}<span>-</span>{author}
           </p>
 
         </div>

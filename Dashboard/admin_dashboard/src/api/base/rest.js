@@ -1,4 +1,4 @@
-import HTTP_METHOD from "../../common/emun/httpMethodEnum";
+import HTTP_METHOD from "../../emun/httpMethodEnum";
 import { HEADER_CONFIG, SERVICE_URL } from "./config";
 
 const userBaseRestRequest = () => {

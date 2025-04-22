@@ -1,0 +1,27 @@
+.container {
+  padding-bottom: 120px;
+}
+.header {
+  display: flex;
+  padding: 40px 0;
+}
+.header div {
+  padding-left: 80px;
+  padding-top: 20px;
+}
+.header p {
+  margin-top: 20px;
+  margin-bottom: 35px;
+}
+.header h1 {
+  font-size: 36px;
+  color: #a27b5c;
+}
+.title {
+  margin: 30px 0;
+}
+.search_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}

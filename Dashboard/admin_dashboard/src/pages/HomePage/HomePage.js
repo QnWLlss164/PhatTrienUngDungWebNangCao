@@ -11,9 +11,7 @@ export default function HomePage() {
             <div>
                 <Navbar />
                 <div className={classes.container}>
-
                     <Outlet />
-
                 </div>
             </div>
 

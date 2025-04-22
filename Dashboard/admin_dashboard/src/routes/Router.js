@@ -6,10 +6,12 @@ import User from '../features/User/User';
 import Restaurant from '../features/Restaurant/Restaurant';
 import Food from '../features/Food/Food';
 import Post from '../features/Post/Post';
+import Login from '../pages/Login/Login';
+import AdminRoute from '../layouts/AdminRoute';
 const Router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />,
+        element: (<AdminRoute><HomePage /></AdminRoute>),
         children: [
             {
                 path: "/categories",
@@ -31,16 +33,13 @@ const Router = createBrowserRouter([
                 path: "/posts",
                 element: <Post />,
             },
-        ]
+        ],
+
     },
-
-    // {
-    //     path: "/products",
-    //     element: <Product />,
-    //     children: [
-
-    //     ]
-    // },
+    {
+        path: "/login",
+        element: <Login />,
+    }
 
 ]);
 

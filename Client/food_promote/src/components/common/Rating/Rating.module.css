@@ -1,0 +1,7 @@
+.rate {
+  display: flex;
+  gap: 10px;
+}
+.rate i {
+  color: #ffa629;
+}

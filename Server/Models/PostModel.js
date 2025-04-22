@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 
 const postsSchema = mongoose.Schema(
     {
-        post_type: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: "PostType"
-        },
         title: {
             type: String,
             required: true,
@@ -22,11 +17,6 @@ const postsSchema = mongoose.Schema(
         description: {
             type: String,
             required: true,
-        },
-        food: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: "Product",
         },
         author: {
             type: String,

@@ -22,11 +22,10 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const [repeatpassword, setRepeatPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const [roles, setRoles] = useState("owner");
     const navigate = useNavigate();
 
     const validateForm = () => {
-        if (!username || !firstname || !lastname || !password || !repeatpassword || (!roles.owner && !roles.visitor)) {
+        if (!username || !firstname || !lastname || !password || !repeatpassword) {
             setErrorMessage("Tất cả các trường đều phải được nhập.");
             return false;
         }
@@ -42,26 +41,30 @@ export default function SignUp() {
             setErrorMessage("Mật khẩu xác nhận không khớp.");
             return false;
         }
-        return true;
-    };
-    const handleCheckboxChange = (e) => {
-        const { name } = e.target;
-        setRoles(name);
 
+        return true;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true)
-        if (!validateForm()) return;
-        UserAPI.Register({ username, firstname, lastname, password, repeatpassword, roles }, (err, data) => {
+        if (!validateForm()) {
+            setLoading(false);
+            return;
+        }
+        UserAPI.Register({ username, firstname, lastname, password, repeatpassword }, (err, data) => {
             if (err) {
-                setErrorMessage("Đăng nhập thất bại: " + err.message);
+                setErrorMessage("Đăng ký thất bại: " + err.message);
+                setLoading(false)
                 return;
             }
+            console.log("user", data)
             localStorage.setItem("token", data.token);
-
-            dispatch({ type: "LOGIN", payload: data });
+            UserAPI.Profile(data.token, (err, data) => {
+                if (!err) {
+                    dispatch({ type: "LOGIN", payload: data });
+                }
+            });
             setLoading(false)
             navigate("/");
         });
@@ -84,30 +87,6 @@ export default function SignUp() {
                 <Button type="submit" className={classes.login_button}>
                     Create account
                 </Button>
-                <div className={classes.role_selection}>
-                    <label className={classes.role_label}>Role</label>
-                    <div className={classes.role_options}>
-                        <label className={classes.checkbox_label}>
-                            <input
-                                type="checkbox"
-                                name="owner"
-                                checked={roles === "owner"}
-                                onChange={handleCheckboxChange}
-                            />
-                            <span>Owner of Restaurant</span>
-                        </label>
-
-                        <label className={classes.checkbox_label}>
-                            <input
-                                type="checkbox"
-                                name="visitor"
-                                checked={roles === "visitor"}
-                                onChange={handleCheckboxChange}
-                            />
-                            <span>An visitor</span>
-                        </label>
-                    </div>
-                </div>
                 <div className={classes.link}>
                     <p>
                         By creating an account you agree to DALAT Foodies’s

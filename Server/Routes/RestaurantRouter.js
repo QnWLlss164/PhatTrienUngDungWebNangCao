@@ -5,6 +5,44 @@ import { admin, protect } from "./../Middleware/AuthMiddleware.js";
 
 const restaurantRoute = express.Router();
 
+restaurantRoute.get('/search', asyncHandler(async (req, res) => {
+  const keyword = req.query.q || "";
+  const page = Number(req.query.page) || 1;
+  const limit = 6;
+  const skip = (page - 1) * limit;
+
+  const filter = {
+    $or: [
+      { name: { $regex: keyword, $options: "i" } },
+      { province: { $regex: keyword, $options: "i" } },
+      { district: { $regex: keyword, $options: "i" } },
+      { ward: { $regex: keyword, $options: "i" } },
+      { street: { $regex: keyword, $options: "i" } },
+    ]
+  };
+
+  const restaurants = await Restaurant.find(filter).skip(skip).limit(limit);
+  const total = await Restaurant.countDocuments(filter);
+
+  res.json({
+    restaurants,
+    totalPages: Math.ceil(total / limit),
+    currentPage: page,
+  });
+}));
+
+restaurantRoute.get("/top", asyncHandler(async (req, res) => {
+  try {
+    const restaurants = await Restaurant.find()
+      .sort({ rating: -1 })
+      .limit(10)
+
+    res.status(200).json(restaurants);
+  } catch (error) {
+    console.error("Lỗi khi lấy nhà hàng top rating:", error);
+    res.status(500).json({ message: "Lỗi server." });
+  }
+}))
 // GET ALL RESTAURANT
 restaurantRoute.get(
   "/",
@@ -53,33 +91,17 @@ restaurantRoute.get(
   })
 );
 
-// GET RESTAURANT BY OWNERS ID
-restaurantRoute.get(
-  "/owners/:id",
-  asyncHandler(async (req, res) => {
-    const restaurant = await Restaurant.find({ owners: req.params.id }).sort({
-      _id: -1,
-    });
-    if (restaurant) {
-      res.json(restaurant);
-    } else {
-      res.status(404);
-      throw new Error("Restaurant not Found");
-    }
-  })
-);
 
 // RESTAURANT REVIEW
 restaurantRoute.post(
   "/:id/review",
   protect,
   asyncHandler(async (req, res) => {
-    const { rating, comment } = req.body;
+    const { rating, comment } = req.body.payload;
     const restaurant = await Restaurant.findById(req.params.id);
     const user_name = req.user.last_name + " " + req.user.first_name;
-
     if (restaurant) {
-      const alreadyReviewed = restaurant.revirews.find(
+      const alreadyReviewed = restaurant.reviews.find(
         (r) => r.user.toString() === req.user._id.toString()
       );
       if (alreadyReviewed) {
@@ -94,14 +116,14 @@ restaurantRoute.post(
         user: req.user._id,
       };
 
-      restaurant.revirews.push(review);
-      restaurant.numReviews = restaurant.revirews.length;
+      restaurant.reviews.push(review);
+      restaurant.numReviews = restaurant.reviews.length;
       restaurant.rating =
-        restaurant.revirews.reduce((acc, item) => item.rating + acc, 0) /
-        restaurant.revirews.length;
+        restaurant.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        restaurant.reviews.length;
 
       await restaurant.save();
-      res.status(201).json({ message: "Reviewed Added" });
+      res.status(201).json({ reviews: restaurant.reviews, rating: restaurant.rating });
     } else {
       res.status(404);
       throw new Error("Restaurant not Found");
@@ -133,7 +155,6 @@ restaurantRoute.post(
   admin,
   asyncHandler(async (req, res) => {
     const {
-      owners,
       name,
       description,
       province,
@@ -152,7 +173,6 @@ restaurantRoute.post(
       throw new Error("Restaurant name already exist");
     } else {
       const restaurant = new Restaurant({
-        owners,
         name,
         description,
         province,

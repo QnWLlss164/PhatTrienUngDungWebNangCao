@@ -46,14 +46,5 @@ const guest = (req, res, next) => {
   }
 };
 
-const owners = (req, res, next) => {
-  if (req.user && req.user.role === 'owners') {
-    next();
-  } else {
-    res.status(401);
-    throw new Error("Not authorized as an Owners");
-  }
-};
 
-
-export { protect, admin, guest, owners };
+export { protect, admin, guest };

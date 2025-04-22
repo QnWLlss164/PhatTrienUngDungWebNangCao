@@ -1,0 +1,32 @@
+.content_image {
+  width: 100%;
+  min-height: 500px;
+  border-radius: 16px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  flex: 1;
+}
+.title {
+  padding-top: 40px;
+}
+.title h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+.content {
+  padding: 120px 0;
+}
+
+.title_recomment {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #a27b5c;
+}
+
+.list_recomment {
+  padding-top: 40px;
+  padding-bottom: 120px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}

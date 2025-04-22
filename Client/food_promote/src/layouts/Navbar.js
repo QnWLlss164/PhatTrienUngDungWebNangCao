@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import NavEnum from "../common/emun/navEnum";
 import classes from './layout.module.css'
 import logo from '../assets/logo.png';
 import Button from "../components/common/Button/Button";
 import { useUser } from "../hook/userContext";
 import { useNavigate } from "react-router-dom";
-
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const { state, dispatch } = useUser();
     const { user } = state;
     const navigate = useNavigate();
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,9 +22,11 @@ export default function Navbar() {
     }, []);
 
     const HandleSignOut = () => {
+        localStorage.removeItem("token");
         dispatch({ type: "LOGOUT" });
         navigate("/login");
     }
+    const handleActive = ({ isActive }) => isActive ? `${classes.nav_item} ${classes.active}` : classes.nav_item
     return (
 
         <div className={` ${classes.header} ${scrolled ? `${classes.scrolled}` : ""}`}>
@@ -34,18 +36,30 @@ export default function Navbar() {
                     <img className={classes.logo} src={logo} alt="logo" />
                 </Link>
                 <div className={classes.nav}>
-                    <Link to={NavEnum.HOME} className={classes.nav_item}>
+                    <NavLink
+                        to={NavEnum.HOME}
+                        className={handleActive}
+                    >
                         <h4>Home</h4>
-                    </Link>
-                    <Link to={NavEnum.LOCAL_DISHES} className={classes.nav_item}>
+                    </NavLink>
+                    <NavLink
+                        to={NavEnum.LOCAL_DISHES}
+                        className={handleActive}
+                    >
                         <h4>Local Dishes</h4>
-                    </Link>
-                    <Link to={NavEnum.DINING_PLACES} className={classes.nav_item}>
+                    </NavLink>
+                    <NavLink
+                        to={NavEnum.DINING_PLACES}
+                        className={handleActive}
+                    >
                         <h4>Dining Places</h4>
-                    </Link>
-                    <Link to={NavEnum.BLOGS_AND_NEWS} className={classes.nav_item}>
+                    </NavLink>
+                    <NavLink
+                        to={NavEnum.BLOGS_AND_NEWS}
+                        className={handleActive}
+                    >
                         <h4>Blogs & News</h4>
-                    </Link>
+                    </NavLink>
                 </div>
                 <div className={classes.btn_box}>
                     {!user ? <>
@@ -70,8 +84,6 @@ export default function Navbar() {
                                 }}
                                     className={classes.avt}></div>
                             </Link>
-
-
                         </>}
 
                 </div>

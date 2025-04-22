@@ -1,18 +1,14 @@
 .list_container {
-  display: flex;
-  gap: 50px;
-  flex-wrap: wrap;
-  /* justify-content: space-between; */
-  padding: 100px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding-bottom: 120px;
 }
 
 .item_container {
-  flex: 1 1 calc((100% - 100px) / 3);
-
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 12px 33.4px rgba(0, 0, 0, 25%);
-  width: 30%;
   background-color: #fff;
 }
 

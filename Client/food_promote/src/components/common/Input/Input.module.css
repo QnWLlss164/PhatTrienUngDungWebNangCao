@@ -34,3 +34,20 @@
   display: flex;
   align-items: center;
 }
+
+.inputWrapper {
+  position: relative;
+  width: 50%;
+}
+
+.inputWrapper input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  padding: 4px 0;
+  font-size: 16px;
+  z-index: 1;
+  position: relative;
+}

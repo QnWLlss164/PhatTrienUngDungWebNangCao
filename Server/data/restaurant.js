@@ -1,5 +1,6 @@
 const restaurants = [
     {
+        _id: "67ff2f59eeb7ef6fb014b9b0",
         name: "Bò Lạc Lối - Lẩu Bò & Nướng",
         description: "Bò Lạc Lối là Quán Bò Tơ Tây Ninh Ngon tại Đà Lạt. Đặc biệt Bò Nướng, Lẩu Bò, Bò Nhúng Hèm là những món không thể bỏ qua ở nơi xứ lạnh như Đà Lạt. Không gian quán ấm áp thích hợp cho bạn bè và gia đình quay quần bên nhau.",
         province: "Lâm Đồng",
@@ -7,13 +8,14 @@ const restaurants = [
         ward: "Phường 8",
         street: "110 Nguyễn Công Trứ",
         contact: "0379767938",
-        image: "https://amazingdalat.com/media/upload/images/am-thuc/Meokssam%20BBQ%20DA%20LAT%20Food.jpg",
-        thumb: "https://media.foody.vn/blogscontents/foody-upload-api-foody-admin-bll-(87)-637448482257575110-201229141707.jpg, https://khamphatayninh.vn/wp-content/uploads/2020/07/tu-hong-5.jpg, https://cachlammonngon.vn/wp-content/uploads/2016/07/thit-bo-nuoc.jpg, https://www.lidota.vn/wp-content/uploads/2014/12/th%E1%BB%8Btb%C3%B2l%E1%BB%A5i.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_WOT4eTqUUC8sComAGluJN1dp6biYaGwnHQ&s",
+        thumb: "https://du-lich-da-lat.com//wp-content/uploads/2022/10/Quan-lau-nuong-Da-Lat-1024x595.png",
         longitude: "11.956405038994212",
         latitude: "108.4395431110704",
-        menu_id: "62d38002aca9eab7c7d0ddb2"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.346072854508!2d108.42727909678955!3d11.9505243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317113f446b9f685%3A0xa799b9ef1de47c4b!2zTOG6qXUgQsOyIOG7mnQgSGnhu4Nt!5e0!3m2!1svi!2s!4v1745137668544!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b1",
         name: "Le Alpi - Da Lat",
         description: "Artisan Home made cheese, sausage and cold cuts from the Piedmont Traditions.",
         province: "Lâm Đồng",
@@ -21,13 +23,14 @@ const restaurants = [
         ward: "Phường 2",
         street: "87 Đường An Dương Vương",
         contact: "0818760210",
-        image: "https://media-cdn.tripadvisor.com/media/photo-s/1d/2a/5e/95/come-and-join-us-for.jpg",
-        thumb: "https://media-cdn.tripadvisor.com/media/photo-s/1b/8b/73/0c/hftff.jpg, https://luhanhvietnam.com.vn/du-lich/vnt_upload/news/03_2021/nha-hang-kieu-au-o-da-lat-Primavera-Italian-Restaurant.jpg, https://diachiamthuc.vn/wp-content/uploads/2021/03/mon-au-o-nha-hang-Emai.jpg, https://luhanhvietnam.com.vn/du-lich/vnt_upload/news/03_2021/nha-hang-kieu-au-o-da-lat-Amis-Restaurant.jpg, https://dulichdalat.pro/wp-content/uploads/2020/08/nhung-mon-an-ngon-cua-nha-hang-memory.jpg, https://menu.sluurpy.com/immagini/locali/thumbs/6193181.jpg",
+        image: "https://lh3.googleusercontent.com/p/AF1QipPySe-D0ulAp1AQ46jVBVRDwmEUgrzKel-JIKqw=s1600-w640",
+        thumb: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROx8BD-ViBBI3gr-QKHjJ1pYF5LCgB7pvR62tLmvKx62CdELCWTmpFATSIz1xoiBo7adU&usqp=CAU",
         longitude: "11.954737435523962",
         latitude: "108.43563496796655",
-        menu_id: "62d38002aca9eab7c7d0ddb3"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.2852275579803!2d108.43076338612353!3d11.954743306138713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171131f079a23ef%3A0x95a025ed9311828!2sLe%20Alpi%20-%20Da%20Lat!5e0!3m2!1svi!2s!4v1745137692786!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b2",
         name: "MiMi Sushi & Pizza Restaurant",
         description: "MiMi Sushi & Pizza luôn mang những bữa ăn gia đình vui vẻ, thoải mái và hạnh phúc nhất đến với Quý khách. Món ăn MiMi là sự kết hợp độc đáo ngon nhất giữa phong cách Âu(Pizza) & Nhật(Sushi) tại Đà Lạt.",
         province: "Lâm Đồng",
@@ -35,13 +38,14 @@ const restaurants = [
         ward: "Phường 2",
         street: "103 Đường Bùi Thị Xuân",
         contact: "0902693696",
-        image: "https://images.foody.vn/res/g23/222880/prof/s1242x600/file_restaurant_photo_xtln_16209-062591d5-210513201536.jpeg",
-        thumb: "https://images.foody.vn/res/g23/222880/s800/foody-mimi-sushi-pizza-577-637566716079089473.jpg, https://media-cdn.tripadvisor.com/media/photo-m/1280/1c/fa/58/0d/2021-mimi-sushi-pizza.jpg, https://media-cdn.tripadvisor.com/media/photo-s/1c/fa/58/30/2021-mimi-sushi-pizza.jpg, https://media-cdn.tripadvisor.com/media/photo-s/1c/fa/57/ff/2021-mimi-sushi-pizza.jpg, https://media-cdn.tripadvisor.com/media/photo-s/1d/08/fb/5b/khong-gian-m-cung-sang.jpg, https://media-cdn.tripadvisor.com/media/photo-s/1d/06/b0/29/khong-gian-m-cung-l-ch.jpg, https://media-cdn.tripadvisor.com/media/photo-m/1280/1c/fa/57/d9/2021-mimi-sushi-pizza.jpg, https://i.ytimg.com/vi/Yfss1h7JZxM/maxresdefault.jpg",
+        image: "https://www.hoteljob.vn/uploads/images/2022/02/14-16/174512227_849532375632865_6381897392762539262_n.jpg",
+        thumb: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNIuovH9VlsfTIm1Qf8gODT6BjSD7OZqFlmg&s",
         longitude: "11.946494484462114",
         latitude: "108.44010866846422",
-        menu_id: "62d38002aca9eab7c7d0ddb4"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.4043969332683!2d108.43754447601447!3d11.946478736521545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317113d4bb0eb251%3A0x75820ba80229b391!2sMiMi%20Sushi%20%26%20Pizza%20Restaurant!5e0!3m2!1svi!2s!4v1745137637736!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b3",
         name: "Nhà Hàng Đà Lạt Xưa",
         description: "Nhà hàng Đà LẠt Xưa chuyên các món đặc sản của Đà Lạt : Gà đồi , heo tộc , ếch om cà đắng , atiso hầm giò heo hạt sen , đuôi bò hầm khoai sọ, cá tầm 4 món",
         province: "Lâm Đồng",
@@ -49,13 +53,14 @@ const restaurants = [
         ward: "Phường 11",
         street: "96B Đ. Hùng Vương",
         contact: "0949753873",
-        image: "https://datphongdalat.vn/wp-content/uploads/2021/01/anh-dau-top-10-nha-hang-da-lat-ngon-nhat-datphongdalat.vn_.jpg",
-        thumb: "https://d1sag4ddilekf6.azureedge.net/compressed/merchants/5-C2MBHEAYLBU2G6/hero/53356996638646cb9640dff26f260fbb_1617872525464509069.png, https://nghiduongdalat.com/wp-content/uploads/2021/07/189625431_2896985177222566_3842503474518384950_n.jpg, https://media.foody.vn/res/g73/729978/prof/s/foody-upload-api-foody-mobile-hkm-jpg-180404114738.jpg, https://2trip.vn/wp-content/uploads/2020/09/nha-hang-da-lat-xua.jpg, https://dalatguides.com/wp-content/uploads/2022/02/nha-hang-nha-toi-1.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCm5PWzztb9krn2W7dDQ3hgBqq-31794FPZg&s",
+        thumb: "https://2trip.vn/wp-content/uploads/2020/09/nha-hang-da-lat-xua.jpg",
         longitude: "11.947509995109499",
         latitude: "108.47460909730005",
-        menu_id: "62d38002aca9eab7c7d0ddb5"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.578263258686!2d108.4272054760144!3d11.934410736766457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171132f0ae3840f%3A0xb48faba95665d5a4!2zTmjDoCBIw6BuZyBTbWlsZSDEkMOgIEzhuqF0IHPhu5EgOCBOZ3V54buFbiBWaeG6v3QgWHXDom4!5e0!3m2!1svi!2s!4v1745137720179!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b4",
         name: "Khap Bun Kha",
         description: "Khap Bun Kha là một trong những quán lẩu thái ngon ở Đà Lạt với hương vị đúng chuẩn Thái. Nước lẩu Thái đậm đà là sự vừa vặn giữa 3 vị chua, mặn, ngọt kết hợp.",
         province: "Lâm Đồng",
@@ -63,13 +68,14 @@ const restaurants = [
         ward: "Phường 1",
         street: "26 Đường Nguyễn Văn Cừ",
         contact: "0263352339",
-        image: "https://suckhoedoisong.qltns.mediacdn.vn/Images/thanhloan/2016/11/15/10-thuc-pham-tot-cho-he-mien-dich-19.jpg",
-        thumb: "https://bbland.net/wp-content/uploads/2018/06/danh-gia-mon-thai-khap-bun-kha-da-lat-1.jpg, https://bbland.net/wp-content/uploads/2018/06/danh-gia-mi-quang-ba-mua-da-nang_thumb-690x388.jpg, https://khapbunkha.com/wp-content/uploads/2021/07/7b6d026ed753200d794236-1-700x487.jpg, https://agotourist.com/wp-content/uploads/2020/10/nhung-mon-thai-ngon-o-rak-khun.jpg, https://agotourist.com/wp-content/uploads/2020/10/quan-thai-rak-khun-o-da-lat.jpg, https://media-cdn.tripadvisor.com/media/photo-s/10/52/9f/3b/beautiful-place.jpg, https://sites.google.com/site/khapbunkha/_/rsrc/1496671347165/home/khap-bun-kha-quan-ban-lau-thai-ngon-tai-da-lat.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMP1wYd12S5brn0IuS3Q7yIvbrO8VzrNTXUA&s",
+        thumb: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARUAAACKCAMAAACzdy7yAAAAM1BMVEX///9uTCvb0sq2pZWSeWD29PLt6eR3Vzjk3deAYkaJblPIvK+lj3uum4ibhG6/sKLSx7xXK0CAAAAGNklEQVR4nO2a53qsKhhGkarY5v6vdoN0sE3imSTnedePxEpZfiIwEAIAAAAAAAAAAAAAAAAAAAAAAAB8EjEybmCv+oRcJ84X1j+X0WzymdbHEnS82GKSnUexd5J3DuZ2F7+7EEL9ZmcOM7/JY1GncLZTa54eDQl2A20yY11C8SguTz2cDjdnGfEdL1XB1pC3KFLKq+LvUzHZecdLaSXcruS5lT4laphScnN+fD6zYlnElZUyo/HCighXv8ipFaHzVHWrpbSis70TK2VZY6ARMpXHpyqz2oov0LGVOqMm/MqCzfnesZVSSvYG7FsZ/Y4NwBMrYqhrJw9qXT3c5rzL9tBKk9FwakWGy/pzK0tX0cRgbqUIwBMrbeXcuyKb46oMzvZGdWqlvb4uf1GwUBdXmkMrtKvRZ1aKADyx0oSKT3Zqjle1aGu5PdZDK21Gy4mVl9/2jyJLqbSyU8y6ZcmsxEctz620IeGzaytR1WLHCj2x0reXqxMrIXv/JLKUSis7xazbq8xKGYDHVsIz6SYa31D7yEU8TkQ4UdYiJDMwFjI7sxKauW5O33t5aCVshtfhyEospqbxKa1lqpmV+FUWF1bCjsrChuY3iL0eQv1kdbz20EqUWGW0m2JsFMMVR1biTp/ChpWpZlaqAEx3Uyp2rdSVyPMes+1dK1JdJ3jWu2tSDK1F7A2EO1Yq962Qpg/bWqkDMG+q6ZtWxjk8uP03iMeOET1L8B0ref+ztGLq9mUrcx2A37ESW4GD1paH+9Y6hL5spa3fE1bC/9RPesTK/pc5WFnqw1+2osNDTa3xE1ZY3axcWzFfkisrw34vLsaK7p+KlaZZubbCmLy0Env7t63YXC6sVNMMjZVOnfXi3rFSdbbuWDGJXVppvmwPWDnun8cU9ENW2pfhESvx0xZGkN+2wk9GuCmJ10NWQqzHodczVmL/mlZWqvLdsDIfzJ2lZBgLH735ISskxHqoYXbHN6zEPgT/tpUj9gYOWV+97sO+ZyWMbUOwPGRlzNL5gJU1bseMxzSelW9biULZo1ZiDC73rCjOv2yF8ywy2wmPi3mXfc/ViPTSCuf9HStx0lXesnI2DrqykurPSN4wBpYvWIlj+fGeFXKjF0eyGJw+aKUnO1OG5+OjAytxfDs8aiX1vuTHrPCioMXRt63EBm981Eps9qZPWfEfjGrS0A9837USY3141EqavDv7PehBK9r3z8vfIlTfVvmOlSR3fNRKjMHpE1Z0GhGI7Oe1RTSX37QSSzB800pPHe6hCb9H+2zbHJfpcLkTrhGkvGGfdGd7mWTc9gz4LHcuLzPaTdFpyYqQ3VGULN8paw8AAAAAAIBFsrJ/KG4seRyb9Zf/FyRzyGqEsvh1RdvJg3u5OzGaK3YWeMrbS0nrYcDPY6xMna14ZeXl4oAN11Y4Z7NqFmERVq9rOqR7eCnuI9AtLDoq3Bit38Zd/g1icX1iGMD13p6kMljZ1lnRdJHYhmvubBz4uZukDQx3ngjpEqPHg/QfxFtZBm4H9JzzYZDm33YuWBmVOWrq1w9aKzuBMJkDKlkhdkanN8e0sP+4Jm6AbzYV98mY6+wk+EQHzre1WdqcVJKdTl78GN7KardcIAws6GB6G7JTG+TLQIRdyL0aA8z+Lq+jFTlNdgkn3XaWORzesGEUrMxme2tERpPnbNIQiv3uWKHhj6Q6WTEP22zZSpvq9eM2dzisZLDxEt6gzi1HHgdjcOImjLbZKH+2p5mVEHp07VIA/QUr/aC4SlbcP1fDjrpd7tvm1K6ISXuDfLbzctbLdnZU5r2srcyd1n/MyjDnT9X/W1ysyNXFykhUHivMLmykZI2LRAQzL5lrhF9bokyTlOqo5JbnX7Ji66FrK+PWrnBTS9uuKEEmXbQr5h1bTBsRl+QIc/20/aoonLBOpFStoldmpe4q/Q6SFVu+WZlvw1JZMUHPB27bDqW1/RYJbS9zFjYrL1PvfjBfF0bsp2WbTdcT0eaIaYaksp+n2SUnlcnAaNt2BvsxUu2ikN9Gv1tCEWaM635LdW+/zVBv10rbZ03z1DtpBehv7MYBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/If8A2yKMGDYedK+AAAAAElFTkSuQmCC",
         longitude: "11.93999048825426",
         latitude: "108.43228272613553",
-        menu_id: "62d38002aca9eab7c7d0ddb6"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.497971734382!2d108.42969707601446!3d11.939985236653268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171132de60b8b13%3A0x83b19837acb080c9!2sM%C3%B3n%20Th%C3%A1i%20-%20Khap%20Bun%20Kha!5e0!3m2!1svi!2s!4v1745137743613!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b6",
         name: "Bò Bít Tết Sury Tại Đà Lạt",
         description: "Trước tiên quán xin dành đến lời cảm ơn chân thành và sự biết ơn sâu sắc với tất cả các khách hàng đã yêu mến và ủng hộ cho bò bít tết SURY từ những ngày đầu đến ngày hôm nay. Thực sự để có được lòng tin, sự hài lòng và sự yêu mến của khách hàng không hề dễ. Trong suốt thời gian qua, đặt địa vị vào người tiêu dùng, thiết nghĩ ai cũng vậy tiêu chuẩn chất lượng và giá thành đồng thời sự am hiểu và nhiệt tình với khách hàng luôn phải ở mức cao nhất mới có thể có được lòng tin và sự yêu mến của khách hàng. Ăn uống thì cần ngon hợp với khẩu vị và sở thích với từng người, chẳng ai là giống ai cả, có những người chỉ quen ăn những nơi đắt tiền, nhà hàng sang trọng nhưng lại có người lại thích nghi được với tất cả các hàng quán khác nhau và hợp với túi tiền của họ. Vì mỗi người đều có suy nghĩ, tư duy khác nhau. Tất cả những lời khen hay góp ý của khách hàng \"Mỗi ngày giúp cho quán thêm động lực để phát triển mỗi ngày tốt hơn\"BÒ BÍT TẾT SURY TRÂN TRỌNG",
         province: "Lâm Đồng",
@@ -77,13 +83,14 @@ const restaurants = [
         ward: "Phường 2",
         street: "Lô 10 - KQH Nguyễn Công Trứ",
         contact: "0918267581",
-        image: "https://inhat.vn/wp-content/uploads/2020/11/quan-bo-bit-te-ngon-ha-noi1.jpg",
-        thumb: "https://bbland.net/wp-content/uploads/2018/06/danh-gia-quan-bo-bit-tet-sury-da-lat_fb_link_thumb.jpg, https://hcmtoplist.com/wp-content/uploads/2022/01/top-20-quan-bo-bit-tet-ngon-o-tphcm-khong-the-bo-qua.jpg, https://bepxua.site/wp-content/uploads/2020/11/Thit-bo-Fuji-bit-tet-cat-san-4.jpg, https://i.pinimg.com/736x/60/51/58/60515853e6b39c10782bebfdc54b4d45.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_TGyA1_xvz6i0etKDdNIH32Rknx9nk99Axw&s",
+        thumb: "https://list.vn/images/800px/chefs-dalat-1284240.jpg",
         longitude: "11.955684891528055",
         latitude: "108.43326186846426",
-        menu_id: "62d38002aca9eab7c7d0ddb7"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.2705166831206!2d108.43082737601459!3d11.955763136332935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317112d3f437e463%3A0x9135f870966dc118!2zQsOyIELDrXQgVOG6v3QgU3VyeSBU4bqhaSDEkMOgIEzhuqF0!5e0!3m2!1svi!2s!4v1745137778330!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b7",
         name: "Nhà Hàng Fujiya Sushi Đà Lạt",
         description: "Nhà hàng thuần tuý món Nhật duy nhất tại Đà Lạt",
         province: "Lâm Đồng",
@@ -91,13 +98,14 @@ const restaurants = [
         ward: "Phường 2",
         street: "Lô 34 - KQH Nguyễn Công Trứ, Phan Đình Phùng",
         contact: "0986833555",
-        image: "https://diachiamthuc.vn/wp-content/uploads/2021/04/nha-hang-nhat-da-lat.jpg",
-        thumb: "https://media-cdn.tripadvisor.com/media/photo-s/12/b1/7a/64/a-sashimi-set-of-fujiya.jpg, https://angididau.com/wp-content/uploads/2018/11/7.jpg, https://du-lich-da-lat.com/wp-content/uploads/2021/11/nha-hang-nhat-Fujiya-Sushi-1024x819.jpg, https://du-lich-da-lat.com/wp-content/uploads/2021/11/sushi-ngon-o-da-lat--1024x819.jpg, https://du-lich-da-lat.com/wp-content/uploads/2021/11/quan-an-nhat-ngon-da-lat-1024x819.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiLpHcqFX_HiNEnXWFtJvsDWPwZFFKnZlsRA&s",
+        thumb: "https://www.cotrang.org/public/images/tin_dang/5/105_fujiya-sushi-nguyen-cong-tru-da-lat-bk-01-logo.jpg",
         longitude: "11.955086095398185",
         latitude: "108.43302666846434",
-        menu_id: "62d38002aca9eab7c7d0ddb8"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.2807368044887!2d108.43049147601465!3d11.95505463634742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317112d3f8ef92af%3A0x5f05d6ac4f133945!2zRnVqaXlhIFN1c2hpIMSQw6AgTOG6oXQgLSBNw7NuIE5o4bqtdA!5e0!3m2!1svi!2s!4v1745137804283!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b8",
         name: "Le Chalet Dalat",
         description: "At Le Chalet we love great food, and we have selected for you our favorite dishes from Vietnam. All the food is bought locally, prepared with care and cooked in our small but unique kitchen. We want our food to not only taste great, but also make you feel great!",
         province: "Lâm Đồng",
@@ -105,13 +113,14 @@ const restaurants = [
         ward: "Phường 4",
         street: "6Đ, Huỳnh Thúc Kháng",
         contact: "0327818799",
-        image: "https://media.travelmag.vn/center/560x315/files/news/2020/07/08/co-mot-nuoc-phap-tho-mong-tai-nha-hang-le-chalet-dalat-142226.jpg",
-        thumb: "https://images.foody.vn/res/g24/238235/prof/s640x400/foody-mobile-hmb-jpg-565-635996001920097963.jpg, https://yt.cdnxbvn.com/medias/place.vn/35/35501/ghe-go-le-chalet-dalat.jpg, https://yt.cdnxbvn.com/medias/place.vn/35/35501/tu-tap-hoi-ban.jpg, https://yt.cdnxbvn.com/medias/uploads/220/220984-an-sang-le-chalet-dalat-500x340.jpg, https://images.foody.vn/res/g24/238235/s/foody-le-chalet-dalat-nha-hang-phap-843-636011031043773057.jpg, https://i.ytimg.com/vi/vLu4RtHjFi0/maxresdefault.jpg, https://yt.cdnxbvn.com/medias/place.vn/35/35501/dep-han-quoc-le-chalet-dalat.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSTg2Lu-BGevDIAeD5nQmErptE636dkvqryw&s",
+        thumb: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR-CfZkbn_tLOTonit6Xstp8KE6woXBRhOBw&s",
         longitude: "11.935048882264617",
         latitude: "108.43086576846403",
-        menu_id: "62d38002aca9eab7c7d0ddb9"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.5694516487633!2d108.42830157601446!3d11.935022636754118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31711333a6bbcde3%3A0x49877217cbf824ed!2sLe%20Chalet%20Dalat!5e0!3m2!1svi!2s!4v1745137596256!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9b9",
         name: "Fungi Chingu Chợ Đêm",
         description: "Chất lượng đồ ăn rất đặc biệt với ba loại nước chấm độc đáo mà cả Sài Gòn cũng không có được. Có một vài món chỉ có Fungi có nư đậu phụ sốt chingu, banchan,...",
         province: "Lâm Đồng",
@@ -119,13 +128,14 @@ const restaurants = [
         ward: "Phường 1",
         street: "1 Nguyễn Thị Minh Khai",
         contact: "19009440",
-        image: "https://cdn3.ivivu.com/2021/03/an-het-quan-nuong-BBQ-Da-Lat-voi-10-dia-chi-sieu-chat-luong-ivivu-0.jpg",
-        thumb: "https://agotourist.com/wp-content/uploads/2018/08/Quan-nuong-Fungi-Chingu-o-Cho-Dem-Da-Lat.jpg, https://agotourist.com/wp-content/uploads/2018/08/Quan-nuong-Fungi-Chingu-Cho-Dem-Da-Lat.jpg, https://dalatpalace.vn/wp-content/uploads/2021/01/fungi-chingu-da-lat-khong-gian.jpg, https://media.foody.vn/res/g22/211860/prof/s/foody-mobile-foody-fungi-chingu-q-891-635914954973820114.jpg, https://cdn.alongwalker.co/vn/wp-content/uploads/2022/04/15042252/image-review-quan-fungi-chingu-cho-dem-an-tuong-an-do-nuong-han-giua-da-lat-164994617219905.jpg",
+        image: "https://media-cdn.tripadvisor.com/media/photo-s/0a/9a/31/24/fungi-chingu-logo.jpg",
+        thumb: "https://ednaresort.vn/wp-content/uploads/2023/08/fungi-chingu-da-lat.png",
         longitude: "11.941944791537173",
         latitude: "108.43727702613559",
-        menu_id: "62d38002aca9eab7c7d0ddba"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.4676848395247!2d108.43425717601447!3d11.942087336610674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171132f18ddef35%3A0x4b0ed19ab6389381!2zRnVuZ2kgQ2hpbmd1IENo4bujIMSQw6pt!5e0!3m2!1svi!2s!4v1745137826673!5m2!1svi!2s"
     },
     {
+        _id: "67ff2f59eeb7ef6fb014b9bb",
         name: "Biang Dalat Garden Restaurant",
         description: "Biang Dalat is an eco friendly farm to table restaurant using all fresh ingredients from the farmers of Dalat city cooked by professional chef in a modern way",
         province: "Lâm Đồng",
@@ -133,11 +143,11 @@ const restaurants = [
         ward: "Phường 2",
         street: "94 Đường Lý Tự Trọng",
         contact: "0911063194",
-        image: "https://media-cdn.tripadvisor.com/media/photo-s/1c/18/45/1a/logo.jpg",
-        thumb: "https://tgroup.vn/uploads/images/Dalat/biang_restaurant_dalat_tgroup_travel_1.jpg, https://media.truyenhinhdulich.vn/upload/news/995_nha_hang_biang_bistro_khong_gian_me_dam_long_nguoi.jpg, https://static.riviu.co/image/2021/01/20/d713e4acb86ec09ab0ade144ded754bf_output.jpeg, https://tgroup.vn/uploads/images/Dalat/biang_restaurant_dalat_tgroup_travel_5.jpg, https://www.wheretovietnam.com/wp-content/uploads/123563224_3580490575361673_1494487894165467728_o-1.jpg, https://toplist.vn/images/800px/emai-dalat-807118.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSviqNvDefYDEMQwEWU38N1mQoKxdI1Abs5nA&s",
+        thumb: "https://media-cdn.tripadvisor.com/media/photo-s/1a/f8/4c/8f/biang-bistro-logo.jpg",
         longitude: "11.94645988799933",
         latitude: "108.43898269729998",
-        menu_id: "62d38002aca9eab7c7d0ddbb"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.4074296955205!2d108.43662537601448!3d11.94626833652581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317113289ae66013%3A0x28deb751f38fc3ef!2sBiang%20Garden%20Restaurant!5e0!3m2!1svi!2s!4v1745137849139!5m2!1svi!2s"
     },
     {
         name: "Émai italian Restaurant",
@@ -147,11 +157,11 @@ const restaurants = [
         ward: "Phường 6",
         street: "1 Đường Thi Sách",
         contact: "02633839001",
-        image: "https://media.dalatcity.org//Images/LDG/bongconganh/%C3%89mai%20Italian%20Restaurant/cropper_636941407568524335.jpg",
-        thumb: "https://a0.muscache.com/im/pictures/8e1bd818-86de-4197-b027-34db9801eef7.jpg?im_w=1200, https://i1.wp.com/www.emaidalat.com/wp-content/uploads/2019/08/duck_4k_01.jpg?resize=3840%2C2563&ssl=1, https://cdn.vietnamisawesome.com/DaLat-E%CC%81mai-Italian-Restaurant.jpg, https://media.dalatcity.org//Images/LDG/bongconganh/%C3%89mai%20Italian%20Restaurant/cropper_636941408548373306.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkyCO96Q5BZQvCGHdZ6f4GIWIgkWjA1mRUu9N1IMr4GQNp564U__cEeh-hQBMKP21F6pI&usqp=CAU",
+        thumb: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/58/79/04/our-romantic-ambience.jpg?w=900&h=500&s=1",
         longitude: "11.946804395082589",
         latitude: "108.43268509727602",
-        menu_id: "62d38002aca9eab7c7d0ddbc"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.5964078108686!2d108.4620134760143!3d11.933150636791964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317113f21fc505e3%3A0x82830bb7c5b4f60f!2s%C3%89mai%20Italian%20Restaurant%20%26%20Gardens!5e0!3m2!1svi!2s!4v1745137519335!5m2!1svi!2s"
     },
     {
         name: "Ngói BBQ",
@@ -161,11 +171,11 @@ const restaurants = [
         ward: "Phường 2",
         street: "111 Đường Bùi Thị Xuân",
         contact: "0944214402",
-        image: "https://www.chudu24.com/wp-content/uploads/2018/04/gia_khiem.jpg",
-        thumb: "https://media-cdn.tripadvisor.com/media/photo-s/0b/b0/0c/12/photo0jpg.jpg, https://images.foody.vn/res/g21/200988/s800/foody-ngoi-bbq-mon-nuong-650-637428061123142168.jpg, https://www.chudu24.com/wp-content/uploads/2020/06/manhmanhday.jpg, https://langthangdalat.com/wp-content/uploads/2021/09/ngoi-bbq-da-lat.jpeg, https://static.riviu.co/960/image/2020/12/20/2d4a8662109748e5e82ee7b9b589f605_output.jpeg",
+        image: "https://png.pngtree.com/png-clipart/20231001/original/pngtree-crossed-fire-and-spatula-grilled-bbq-typography-logo-design-ideal-for-png-image_12929575.png",
+        thumb: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2u1EdFaJFinJEIUK220VjHj5vTYdNFw8cog&s",
         longitude: "11.947008587977665",
         latitude: "108.4404360972761",
-        menu_id: "62d38002aca9eab7c7d0ddbd"
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.3975470788246!2d108.4379805760143!3d11.946953936511866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31711327c441bee3%3A0x3c1a69881faa9a55!2zTmfDs2kgQkJR!5e0!3m2!1svi!2s!4v1745137871074!5m2!1svi!2s"
     }
 ];
 

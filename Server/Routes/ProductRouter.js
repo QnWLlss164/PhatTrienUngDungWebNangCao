@@ -2,12 +2,49 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import {
   admin,
-  owners,
   protect,
 } from "../Middleware/AuthMiddleware.js";
 import Product from "../Models/ProductModel.js";
-
+import Restaurant from "../Models/RestaurantModel.js";
 const productRoute = express.Router();
+
+productRoute.get('/search', asyncHandler(async (req, res) => {
+  const keyword = req.query.q || ""; // từ khóa tìm kiếm
+  const page = Number(req.query.page) || 1;
+  const limit = 6;
+  const skip = (page - 1) * limit;
+
+  const filter = {
+    $or: [
+      { name: { $regex: keyword, $options: "i" } },
+      { description: { $regex: keyword, $options: "i" } },
+    ]
+  };
+
+  const products = await Product.find(filter).skip(skip).limit(limit);
+  const total = await Product.countDocuments(filter);
+
+  res.json({
+    products,
+    totalPages: Math.ceil(total / limit),
+    currentPage: page,
+  });
+}));
+
+
+productRoute.get("/top",
+  asyncHandler(async (req, res) => {
+    try {
+      const foods = await Product.find()
+        .sort({ rating: -1 })
+        .limit(10)
+
+      res.status(200).json(foods);
+    } catch (error) {
+      console.error("Lỗi khi lấy món ăn top rating:", error);
+      res.status(500).json({ message: "Lỗi server." });
+    }
+  }))
 
 //Get all product
 productRoute.get(
@@ -15,16 +52,8 @@ productRoute.get(
   asyncHandler(async (req, res) => {
     const pageSize = 12;
     const page = Number(req.query.pageNumber) || 1;
-    const keyword = req.query.keyword
-      ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
-      }
-      : {};
-    const count = await Product.countDocuments({ ...keyword });
-    const products = await Product.find({ ...keyword })
+    const count = await Product.countDocuments({});
+    const products = await Product.find({})
       .limit(pageSize)
       .skip(pageSize * (page - 1))
       .sort({ _id: 1 });
@@ -47,12 +76,21 @@ productRoute.get(
 productRoute.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404);
-      throw new Error("Product not Found");
+    try {
+      const product = await Product.findById(req.params.id);
+      if (product) {
+        const restaurant = await Restaurant.findById(product.restaurant_id);
+
+        res.json({
+          ...product.toObject(),
+          restaurantName: restaurant?.name || '',
+        });
+      } else {
+        res.status(404);
+        throw new Error("Product not Found");
+      }
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
     }
   })
 );
@@ -84,23 +122,29 @@ productRoute.get(
 productRoute.get(
   "/recomment/:categoryId",
   asyncHandler(async (req, res) => {
-    const pageSize = 5;
-    const page = Number(req.query.pageNumber) || 1;
-    const categoryId = req.params.categoryId;
-    const ketword = req.query.keyword
-      ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
+    try {
+      const categoryId = req.params.categoryId;
+      const limit = 4;
+      const productsInCategory = await Product.find({ categories_id: categoryId }).limit(limit);
+
+      let finalProducts = [...productsInCategory];
+
+      if (productsInCategory.length < limit) {
+        const remaining = limit - productsInCategory.length;
+        const excludedIds = productsInCategory.map(p => p._id);
+
+        const randomProducts = await Product.aggregate([
+          { $match: { _id: { $nin: excludedIds } } },
+          { $sample: { size: remaining } },
+        ]);
+
+        finalProducts = finalProducts.concat(randomProducts);
       }
-      : {};
-    const count = await Product.countDocuments({ ...keyword });
-    const products = await Product.find({ categories_id: categoryId })
-      .limit(pageSize)
-      .skip(pageSize * (page - 1))
-      .sort({ _id: 1 });
-    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+
+      res.json({ products: finalProducts });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
   })
 );
 
@@ -108,23 +152,26 @@ productRoute.get(
 productRoute.get(
   "/menu-id/:menuId",
   asyncHandler(async (req, res) => {
-    const pageSize = 12;
+    const pageSize = 8;
     const page = Number(req.query.pageNumber) || 1;
     const menuId = req.params.menuId;
-    const keyword = req.query.keyword
-      ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
-      }
-      : {};
-    const count = await Product.countDocuments({ ...keyword });
-    const products = await Product.find({ menu_id: menuId })
+
+    const count = await Product.countDocuments({ restaurant_id: menuId });
+    const products = await Product.find({ restaurant_id: menuId })
       .limit(pageSize)
       .skip(pageSize * (page - 1))
       .sort({ _id: -1 });
-    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+
+    const topRatedProducts = await Product.find({ restaurant_id: menuId })
+      .sort({ rating: -1 })
+      .limit(4);
+
+    res.json({
+      products,
+      topRated: topRatedProducts,
+      page,
+      pages: Math.ceil(count / pageSize)
+    });
   })
 );
 
@@ -133,7 +180,7 @@ productRoute.post(
   "/:id/review",
   protect,
   asyncHandler(async (req, res) => {
-    const { rating, comment } = req.body;
+    const { rating, comment } = req.body.payload;
     const product = await Product.findById(req.params.id);
     const user_name = req.user.last_name + " " + req.user.first_name;
 
@@ -152,7 +199,6 @@ productRoute.post(
         comment,
         user: req.user._id,
       };
-
       product.reviews.push(review);
       product.num_reviews = product.reviews.length;
       product.rating =
@@ -160,7 +206,7 @@ productRoute.post(
         product.reviews.length;
 
       await product.save();
-      res.status(201).json({ message: "Reviewed Added" });
+      res.status(201).json({ reviews: product.reviews, rating: product.rating });
     } else {
       res.status(404);
       throw new Error("Product not Found");
@@ -172,7 +218,6 @@ productRoute.post(
 productRoute.delete(
   "/:id",
   protect,
-  owners,
   asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -189,7 +234,6 @@ productRoute.delete(
 productRoute.post(
   "/",
   protect,
-  owners,
   asyncHandler(async (req, res) => {
     const { name, image, categories_id, menu_id, description, price, unit } =
       req.body;

@@ -2,52 +2,57 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import {
     admin,
-    owners,
     protect,
 } from "../Middleware/AuthMiddleware.js";
-import Post from "../Models/PostModel.js";
+import Posts from "../Models/PostModel.js";
 
-const PostRoute = express.Router();
+const postRoute = express.Router();
 
 //Get all Post
-PostRoute.get(
+postRoute.get(
     "/",
     asyncHandler(async (req, res) => {
         const pageSize = 12;
         const page = Number(req.query.pageNumber) || 1;
-        const keyword = req.query.keyword
-            ? {
-                name: {
-                    $regex: req.query.keyword,
-                    $options: "i",
-                },
-            }
-            : {};
-        const count = await Post.countDocuments({ ...keyword });
-        const Posts = await Post.find({ ...keyword })
+        const count = await Posts.countDocuments({});
+        const listPost = await Posts.find({})
             .limit(pageSize)
             .skip(pageSize * (page - 1))
             .sort({ _id: 1 });
-        res.json({ Posts, count, page, pages: Math.ceil(count / pageSize) });
+        res.json({ listPost, page, pages: Math.ceil(count / pageSize) });
     })
 );
 
 // ADMIN GET ALL Post WITHOUT SEARCH AND PEGINATION
-PostRoute.get(
+postRoute.get(
     "/all",
     protect,
     admin,
     asyncHandler(async (req, res) => {
-        const Posts = await Post.find({}).sort({ _id: -1 });
-        res.json(Posts);
+        const listPost = await Posts.find({}).sort({ _id: -1 });
+        res.json(listPost);
     })
 );
 
+postRoute.get(
+    "/recomment",
+    asyncHandler(async (req, res) => {
+        try {
+            const randomPost = await Posts.aggregate([
+                { $sample: { size: 4 } }
+            ]);
+            res.json({ listPost: randomPost });
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({ message: err.message });
+        }
+    })
+);
 // GET SINGLE Post
-PostRoute.get(
+postRoute.get(
     "/:id",
     asyncHandler(async (req, res) => {
-        const Post = await Post.findById(req.params.id);
+        const Post = await Posts.findById(req.params.id);
         if (Post) {
             res.json(Post);
         } else {
@@ -57,13 +62,15 @@ PostRoute.get(
     })
 );
 
+
 // DELETE Post
-PostRoute.delete(
+postRoute.delete(
     "/:id",
     protect,
     admin,
     asyncHandler(async (req, res) => {
-        const Post = await Post.findById(req.params.id);
+        console.log(req.params.id)
+        const Post = await Posts.findById(req.params.id);
         if (Post) {
             await Post.remove();
             res.json({ message: "Post deleted" });
@@ -75,26 +82,23 @@ PostRoute.delete(
 );
 
 // CREATE Post
-PostRoute.post(
+postRoute.post(
     "/",
     protect,
     admin,
     asyncHandler(async (req, res) => {
-        const { name, image, categories_id, menu_id, description, price, unit } =
+        const { name, image, description } =
             req.body;
 
-        const Post = new Post({
+        const Post = new Posts({
             name,
             image,
-            categories_id,
-            menu_id,
             description,
-            price,
-            unit,
+
             user: req.user._id,
         });
         if (Post) {
-            const createdPost = await Post.save();
+            const createdPost = await Posts.save();
             res.status(201).json(createdPost);
         } else {
             res.status(400);
@@ -104,22 +108,19 @@ PostRoute.post(
 );
 
 // UPDATE POST
-PostRoute.put(
+postRoute.put(
     "/:id",
     protect,
     admin,
     asyncHandler(async (req, res) => {
-        const { name, image, categories_id, menu_id, description, price, unit } =
+        const { name, image, description } =
             req.body;
-        const Post = await Post.findById(req.params.id);
+        const Post = await Posts.findById(req.params.id);
         if (Post) {
             Post.name = name || Post.name;
             Post.image = image || Post.image;
-            Post.categories_id = categories_id || Post.categories_id;
-            Post.menu_id = menu_id || Post.menu_id;
             Post.description = description || Post.description;
-            Post.price = price || Post.price;
-            Post.unit = unit || Post.unit;
+
 
             const updatedPost = await Post.save();
             res.json(updatedPost);
@@ -130,4 +131,4 @@ PostRoute.put(
     })
 );
 
-export default PostRoute;
+export default postRoute;

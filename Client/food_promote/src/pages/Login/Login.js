@@ -25,8 +25,8 @@ export default function Login() {
             setErrorMessage("Tên đăng nhập và mật khẩu không được để trống.");
             return false;
         }
-        if (username.length < 6) {
-            setErrorMessage("Tên đăng nhập phải có ít nhất 6 ký tự.");
+        if (username.length < 5) {
+            setErrorMessage("Tên đăng nhập phải có ít nhất 5 ký tự.");
             return false;
         }
         if (password.length < 6) {
@@ -39,17 +39,27 @@ export default function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true)
-        if (!validateForm()) return;
-
+        if (!validateForm()) {
+            setLoading(false)
+            return;
+        }
         UserAPI.Login({ username, password }, (err, data) => {
             if (err) {
                 setErrorMessage("Đăng nhập thất bại: " + err.message);
+                setLoading(false)
+                return;
+            }
+            if (data.role !== "guest") {
+                setErrorMessage("Tài khoản không có quyền truy cập trang người dùng.");
+                setLoading(false)
                 return;
             }
             localStorage.setItem("token", data.token);
-
-            dispatch({ type: "LOGIN", payload: data });
-
+            UserAPI.Profile(data.token, (err, data) => {
+                if (!err) {
+                    dispatch({ type: "LOGIN", payload: data });
+                }
+            });
             setLoading(false)
             navigate("/");
         });

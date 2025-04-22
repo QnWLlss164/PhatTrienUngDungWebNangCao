@@ -7,8 +7,9 @@ import restaurants from "./data/restaurant.js";
 import Product from "./Models/ProductModel.js";
 import products from "./data/product.js";
 import Categories from "./Models/CategoryModel.js";
-import types from "./data/type.js";
-
+import category from "./data/category.js";
+import Posts from "./Models/PostModel.js";
+import posts from "./data/post.js";
 const ImportData = express.Router();
 
 ImportData.post(
@@ -20,6 +21,14 @@ ImportData.post(
   })
 );
 
+ImportData.post(
+  "/post",
+  asyncHandler(async (req, res) => {
+    await Posts.deleteMany({});
+    const importPost = await Posts.insertMany(posts);
+    res.send({ importPost });
+  })
+);
 
 ImportData.post(
   "/restaurant",
@@ -44,7 +53,7 @@ ImportData.post(
   "/categories",
   asyncHandler(async (req, res) => {
     await Categories.deleteMany({});
-    const importCat = await Categories.insertMany(types);
+    const importCat = await Categories.insertMany(category);
     res.send({ importCat });
   })
 );
