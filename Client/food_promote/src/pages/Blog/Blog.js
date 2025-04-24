@@ -10,17 +10,17 @@ export default function Blog() {
                 <img src={blog_img} alt="blog" />
                 <div>
                     <h1 >
-                        Blog & Food Stories
+                        Blog & Câu chuyện ẩm thực
                     </h1>
                     <p>
-                        Beyond taste  discover the culture behind every dish!Food is more than just a meal, it’s a reflection of history, culture and traditions. Read our latest blog posts featuring food stories, seasonal recommendations and festival highlights.
+                        Ngoài hương vị, hãy khám phá nền văn hóa đằng sau mỗi món ăn! Ẩm thực không chỉ là một bữa ăn, mà còn là sự phản ánh của lịch sử, văn hóa và truyền thống. Đọc các bài đăng trên blog mới nhất của chúng tôi có các câu chuyện về ẩm thực, các khuyến nghị theo mùa và các điểm nhấn lễ hội.
                     </p>
                     <SearchBar />
                 </div>
             </div>
             <div>
                 <h1 className={classes.title}>
-                    Blog & Food Stories List
+                    Danh sách Blog & Câu chuyện ẩm thực
                 </h1>
                 <PostList />
             </div>

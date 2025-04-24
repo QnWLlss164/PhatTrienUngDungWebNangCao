@@ -6,18 +6,26 @@
 }
 .avt {
   width: 100%;
+  height: 300px;
 }
 .container {
   padding: 10px 20px;
+  min-height: 184px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .name {
-  color: #a1a1a1;
+  /* color: #a1a1a1; */
+  font-weight: 600;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 .icon_box {
   display: flex;
   text-align: center;
   margin-top: 10px;
+  gap: 10px;
 }
 .icon_setting {
   flex: 1;

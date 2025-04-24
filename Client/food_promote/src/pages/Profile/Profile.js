@@ -69,6 +69,7 @@ const Profile = () => {
 
     const updateField = async (field, value) => {
         const updated = { ...userInfo, [field]: value };
+        console.log(updated)
         setLoading(true);
         await UserAPI.UpdateProfile(token, updated, (err, data) => {
             if (err) {
@@ -102,7 +103,7 @@ const Profile = () => {
                     onChangePassword={changePassword}
                 />
                 <div className={classes.list_header}>
-                    <h1>Product favarite</h1>
+                    <h1>Món ăn yêu thích</h1>
                 </div>
                 {
                     userInfo.favoriteProducts?.length > 0 ? <>
@@ -118,7 +119,7 @@ const Profile = () => {
 
                 <div className={classes.list_header}>
                     <h1 >
-                        Favorite Restaurant
+                        Nhà hàng yêu thích
                     </h1>
                 </div>
                 {

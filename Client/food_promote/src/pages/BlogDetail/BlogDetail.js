@@ -60,7 +60,7 @@ export default function BlogDetail() {
                 </div>
                 <div className={classes.recomment}>
                     <h1 className={classes.title_recomment}>
-                        More like this post
+                        Những bài đăng tương tự
                     </h1>
                     {
                         recomment && recomment.length > 0 ?

@@ -7,7 +7,6 @@ import productRoute from "./Routes/ProductRouter.js";
 import userRouter from "./Routes/UserRouter.js";
 import restaurantRoute from "./Routes/RestaurantRouter.js";
 import categoriesRoute from "./Routes/CategoriesRouter.js";
-import geocodeRoute from "./Routes/GeocodeRouter.js";
 import cors from "cors";
 import postRoute from "./Routes/PostRouter.js";
 
@@ -49,7 +48,6 @@ app.use("/api/post", postRoute);
 app.use("/api/users", userRouter);
 app.use("/api/categories", categoriesRoute);
 app.use("/api/restaurants", restaurantRoute);
-app.use("/api/config/geocode", geocodeRoute);
 
 // app.get("/api/config/paypal", (req, res) => {
 //   res.send(

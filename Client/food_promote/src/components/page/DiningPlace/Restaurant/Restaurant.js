@@ -13,7 +13,7 @@ export default function Restaurant(props) {
         <div onClick={handleClick} className={`${classes.item_container}`}>
             <div style={{
                 backgroundImage: `url(${image})`,
-                backgroundSize: "cover",
+                backgroundSize: "contain",
                 backgroundPosition: "center",
 
             }}

@@ -14,7 +14,9 @@
 .inputbox p {
   margin-bottom: 10px;
 }
-
+.inp_search {
+  width: 50%;
+}
 .inputbox {
   display: flex;
   flex-direction: column;
@@ -22,10 +24,14 @@
 }
 .table {
   flex: 1;
+  margin-top: 60px;
 }
 .btn {
-  width: 100%;
+  /* width: 100%; */
   margin-top: 40px;
+  padding-left: 80px !important;
+  padding-right: 80px !important;
+  /* width: fit-content; */
 }
 .btn input {
   background-color: transparent;
@@ -69,4 +75,10 @@
   padding: 15px;
   border-radius: 16px;
   width: 80%;
+}
+
+.create_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

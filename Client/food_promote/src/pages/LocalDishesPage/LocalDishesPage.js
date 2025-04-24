@@ -54,17 +54,17 @@ export default function LocalDishesPage() {
                 <img src={Feature_img} alt="feature" />
                 <div>
                     <h1 >
-                        Featured Local Dishes
+                        Món ăn địa phương đặc sắc
                     </h1>
                     <p>
-                        Explore the signature flavors of out region. From savior street food to exquisite traditional dishes.
+                        Khám phá hương vị đặc trưng của vùng đất chúng tôi. Từ ẩm thực đường phố đến các món ăn truyền thống tinh tế.
                     </p>
                     <SearchBar defaultValue={keyword} onSearch={handleSearch} />
                 </div>
             </div>
             <div className={classes.container}>
                 <h1 className={classes.title}>
-                    Choose Category
+                    Chọn danh mục
                 </h1>
                 <CategorySlide />
 
@@ -72,7 +72,7 @@ export default function LocalDishesPage() {
                     keyword.trim() !== "" &&
                     (products.length > 0 ? <>
                         <h1 className={classes.title}>
-                            Search results for "{keyword}"
+                            Kết quả tìm kiếm cho "{keyword}"
                         </h1>
                         <div className={classes.search_list}>
                             {products.map((product) => (
@@ -87,7 +87,7 @@ export default function LocalDishesPage() {
                 }
 
                 <h1 className={classes.title}>
-                    Local Dishes List
+                    Danh sách món ăn địa phương
                 </h1>
                 <FoodList />
 

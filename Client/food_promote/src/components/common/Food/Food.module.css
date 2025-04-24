@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 .item_img {
   border-radius: 50%;
-  /* overflow: hidden; */
   width: 250px;
   height: 250px;
   display: flex;
@@ -15,11 +15,15 @@
   font-size: 24px;
   font-weight: bold;
   transform: translateY(30%);
+  position: relative;
 }
 .item_img i {
   color: rgb(225, 30, 30);
   font-size: 40px;
-  transform: translate(290%, 270%);
+  right: -10px;
+  bottom: 0;
+  /* transform: translate(290%, 270%); */
+  position: absolute;
 }
 .item_content {
   padding: 100px 20px 20px 20px;

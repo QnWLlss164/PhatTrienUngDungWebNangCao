@@ -3,8 +3,20 @@ import asyncHandler from "express-async-handler";
 import Categories from "../Models/CategoryModel.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
 import Product from "../Models/ProductModel.js";
+import upload from "../Middleware/Upload.js";
 const categoriesRoute = express.Router();
 
+categoriesRoute.get("/chart",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    try {
+      const categories = await Categories.find({}, "name views");
+      res.json(categories)
+    } catch (err) {
+      res.status(500).json({ message: err })
+    }
+  }))
 // GET ALL CATEEGORIES
 categoriesRoute.get(
   "/getSlide",
@@ -41,16 +53,41 @@ categoriesRoute.get(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const categories = await Categories.find({}).sort({ _id: -1 });
+    const pageSize = 12;
+    const page = Number(req.query.pageNumber) || 1;
+    const keyword = req.query.keyword
+      ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+      : {};
+    const count = await Categories.countDocuments({ ...keyword });
+    const categories = await Categories.find({ ...keyword })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1))
+      .sort({ _id: -1 });
+    res.json({ categories, page, pages: Math.ceil(count / pageSize) });
+  })
+);
+categoriesRoute.get(
+  "/name",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    const categories = await Categories.find({})
     res.json(categories);
   })
 );
-
 // GET SINGLE CATEGRIES
 categoriesRoute.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const category = await Categories.findById(req.params.id);
+    const category = await Categories.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 0.5 } },
+      { new: true });;
     if (!category) {
       res.status(404);
       throw new Error("Category not found");
@@ -94,8 +131,11 @@ categoriesRoute.post(
   "/",
   protect,
   admin,
+  upload.single("image"),
   asyncHandler(async (req, res) => {
-    const { name, image } = req.body.payload;
+    const name = req.body.name;
+    const image = req.file?.path;
+
     const categoryExist = await Categories.findOne({ name });
     if (categoryExist) {
       res.status(400);
@@ -105,6 +145,7 @@ categoriesRoute.post(
         name,
         image,
       });
+
       if (category) {
         const createdcategory = await category.save();
         res.status(201).json(createdcategory);
@@ -121,12 +162,15 @@ categoriesRoute.put(
   "/:id",
   protect,
   admin,
+  upload.single("image"),
   asyncHandler(async (req, res) => {
-    const { name, image } = req.body.payload;
+    const name = req.body.name;
+    const image = req.file?.path;
+
     const category = await Categories.findById(req.params.id);
     if (category) {
       category.name = name || category.name;
-      category.image = image || product.image;
+      category.image = image || category.image;
 
       const updatedCategory = await category.save();
       res.json(updatedCategory);

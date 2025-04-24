@@ -80,16 +80,20 @@ const restaurantSchema = mongoose.Schema(
     },
     longitude: {
       type: String,
-      required: true,
+      // required: true,
     },
     latitude: {
       type: String,
-      required: true,
+      // required: true,
     },
     location: {
       type: String,
       required: true
-    }
+    },
+    views: {
+      type: Number,
+      default: 0
+    },
   },
   {
     timestamps: true,

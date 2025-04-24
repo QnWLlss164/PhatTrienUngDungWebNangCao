@@ -107,7 +107,7 @@ export default function RestaurantDetails() {
             {/* latitude={restaurant.latitude} longitude={restaurant.longitude} */}
             <div>
                 <h1 className={classes.menu_title}>
-                    Feature Food
+                    Món ăn đặc trưng
                 </h1>
                 {menu.length > 0 ?
                     <div className={classes.menu_list}>

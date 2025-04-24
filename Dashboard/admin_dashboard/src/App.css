@@ -1,0 +1,6 @@
+.ql-editor img {
+  max-width: 100%; /* ảnh không vượt quá khung */
+  height: auto;
+  display: block;
+  margin: 10px auto; /* căn giữa mặc định */
+}

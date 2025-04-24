@@ -6,6 +6,11 @@ import Button from '../../components/Button/Button'
 import InpImage from '../../components/InpImage/InpImage'
 import { CategoryAPI } from '../../api/categorieAPI'
 import { LoaderContext } from '../../hooks/LoaderContext'
+import { useSearchParams } from "react-router-dom";
+import EditCategory from '../../components/Pages/Categories/EditCategory/EditCategory'
+import Pagination from '../../components/Pagination/Pagination'
+import { useToast } from '../../hooks/ToastContext'
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 export default function Category() {
     const { setLoading } = useContext(LoaderContext)
@@ -14,48 +19,107 @@ export default function Category() {
     const [categories, setCategories] = useState([]);
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
-    const [editMode, setEditMode] = useState(false);
-    const [editingId, setEditingId] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [keyword, setKeyword] = useState("");
+    const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
+    const [totalPages, setTotalPages] = useState(1);
+    const { showToast } = useToast();
+    const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+    const [confirmMessage, setConfirmMessage] = useState("");
+
     const title = [
         "id", "Tên", "Hành động"
     ]
+
     useEffect(() => {
-        setLoading(true)
-        CategoryAPI.getAllCategory(token, (err, data) => {
+        const page = Number(searchParams.get("page")) || 1;
+        setCurrentPage(page);
+    }, [searchParams]);
+
+    useEffect(() => {
+        const query = {
+            pageNumber: currentPage,
+            keyword,
+        };
+        CategoryAPI.getAllCategory(token, query, (err, data) => {
             if (err) {
                 setError(err.message)
             } else {
-                setCategories(data)
+                setCategories(data.categories)
+                setTotalPages(data.pages)
             }
-            setLoading(false)
+
         })
-    }, [])
+    }, [keyword, currentPage])
 
-    const handleCreate = () => {
-        if (!name || !image) return alert("Vui lòng nhập đầy đủ thông tin.");
-        CategoryAPI.createCategory(token, { name, image }, (err, data) => {
-            if (!err) {
-
-                alert("tạo thành công")
-            }
-        });
-    };
-
-    const handleDelete = (id) => {
-        if (window.confirm("Bạn có chắc chắn muốn xóa?")) {
-            CategoryAPI.deleteCategory(id, token, (err, data) => {
-                if (!err) alert("xóa thành công");
-            });
+    const handlePageChange = (page) => {
+        if (page !== currentPage) {
+            setSearchParams({ page });
         }
     };
 
-    const handleUpdate = () => {
-        CategoryAPI.updateCategory(token, editingId, { name, image }, (err, data) => {
+    const handleCreate = () => {
+        setLoading(true)
+        if (!name || !image) return showToast("Vui lòng nhập đầy đủ thông tin.");
+        CategoryAPI.createCategory(token, { name, image }, (err, data) => {
             if (!err) {
-                setCategories(...categories, data)
-                alert("sửa thành công")
+                setCategories([...categories, data])
+                setName("");
+                setImage("");
+                showToast("tạo thành công")
             }
+            setLoading(false)
         });
+    };
+
+    const handleDelete = (userId) => {
+        setConfirmDeleteId(userId);
+        setConfirmMessage("Bạn có chắc muốn xóa danh mục này?");
+    };
+
+    const confirmDeleteCategory = () => {
+        if (!confirmDeleteId) return;
+        setLoading(true);
+        CategoryAPI.deleteCategory(token, confirmDeleteId, (err, res) => {
+            if (!err) {
+                setCategories((prevCategories) =>
+                    prevCategories.filter((category) => category._id !== confirmDeleteId)
+                );
+                showToast("Xóa món ăn thành công");
+            }
+            else {
+                showToast("Xóa món ăn thất bại");
+            }
+            setLoading(false);
+            setConfirmDeleteId(null);
+        });
+    };
+
+    const handleSaveEdit = (updatedCategory) => {
+        setShowModal(false);
+        setLoading(true)
+        CategoryAPI.updateCategory(token, updatedCategory._id, {
+            name: updatedCategory.name,
+            image: updatedCategory.image
+        }, (err, data) => {
+            if (!err) {
+                setCategories(prev =>
+                    prev.map(cat => (cat._id === data._id ? data : cat)))
+
+
+                setLoading(false)
+                showToast("Sửa thành công");
+            }
+
+
+        });
+    };
+
+    const handleEditClick = (category) => {
+        setSelectedCategory(category);
+        setShowModal(true);
     };
     return (
         <div>
@@ -66,18 +130,40 @@ export default function Category() {
                 <div className={classes.inputbox}>
                     <div>
                         <p>Tên danh mục món ăn</p>
-                        <Input className={classes.inp} type="text" placeholder='Gõ tên' />
+                        <Input value={name} onChange={(e) => setName(e.target.value)} className={classes.inp} type="text" placeholder='Gõ tên' />
                     </div>
-                    <div>
-                        <InpImage />
-                        <Button className={classes.btn}>Tạo danh mục</Button>
+                    <div className={classes.create_content}>
+                        <InpImage value={image} onChange={setImage} />
+                        <Button onClick={handleCreate} className={classes.btn}>Tạo danh mục</Button>
                     </div>
                 </div>
 
                 <div className={classes.table}>
-                    <Table content={categories} title={title} onEdit={handleUpdate} onDelete={handleDelete} />
+                    <Input className={classes.inp_search} placeholder="Tìm kiếm danh mục" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+                    <Table content={categories} title={title} onEdit={handleEditClick} onDelete={handleDelete} />
                 </div>
+                {totalPages > 1 && (
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
+                )}
             </div>
+            {showModal && selectedCategory && (
+                <EditCategory
+                    category={selectedCategory}
+                    onClose={setShowModal}
+                    onSave={handleSaveEdit}
+                />
+            )}
+            {confirmDeleteId && (
+                <ConfirmModal
+                    message={confirmMessage}
+                    onConfirm={confirmDeleteCategory}
+                    onCancel={() => setConfirmDeleteId(null)}
+                />
+            )}
         </div>
     )
 }

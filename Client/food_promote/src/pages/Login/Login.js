@@ -49,7 +49,7 @@ export default function Login() {
                 setLoading(false)
                 return;
             }
-            if (data.role !== "guest") {
+            if (data.role !== "guest" || !data.status) {
                 setErrorMessage("Tài khoản không có quyền truy cập trang người dùng.");
                 setLoading(false)
                 return;

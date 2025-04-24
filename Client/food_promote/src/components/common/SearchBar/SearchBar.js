@@ -20,7 +20,7 @@ function SearchBar({ defaultValue = "", onSearch }) {
                 type="text"
                 value={query}
                 onChange={handleChange}
-                placeholder="Search..."
+                placeholder="Tìm kiếm..."
                 className={classes.search_input}
             />
             <button type="submit" className={classes.search_button}>

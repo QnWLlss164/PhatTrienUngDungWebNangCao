@@ -19,7 +19,9 @@
 .item_img i {
   color: rgb(225, 30, 30);
   font-size: 40px;
-  transform: translate(290%, 270%);
+  right: -10px;
+  bottom: 0;
+  position: absolute;
 }
 .item_content {
   padding: 90px 30px 50px 30px;

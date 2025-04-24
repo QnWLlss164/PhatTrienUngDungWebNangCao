@@ -22,10 +22,20 @@ export const UserAPI = {
         }, token);
     },
     async UpdateProfile(token, payload, cb) {
-        await restRequest.put(`users/profile`, { payload }, (err, result) => {
+        const formData = new FormData();
+        for (const key in payload) {
+            if (payload[key]) {
+                if (key === "image" || key === "thumb") {
+                    formData.append(key, payload[key]); // là File
+                } else {
+                    formData.append(key, payload[key]);
+                }
+            }
+        }
+        await restRequest.put(`users/profile`, formData, (err, result) => {
             if (err) return cb(err);
             if (typeof cb === "function") cb(null, result);
-        }, token);
+        }, token, true);
     },
     async ChangePassword(token, payload, cb) {
         await restRequest.put(`users/change-password`, { payload }, (err, result) => {

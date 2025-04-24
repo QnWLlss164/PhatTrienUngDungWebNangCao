@@ -3,17 +3,16 @@ import { Link, NavLink } from 'react-router-dom';
 import classes from './Sidebar.module.css'
 import logo from '../../assets/logo.png'
 
-export default function Sidebar() {
+export default function Sidebar({ collapsed }) {
+
     const handleActive = ({ isActive }) => isActive ? `${classes.sidebar_item} ${classes.active}` : `${classes.sidebar_item}`
     return (
-        <div className={classes.sidebar}>
+        <div className={`${classes.sidebar} ${collapsed ? classes.collapsed : ''}`}>
             <div className={classes.header}>
                 <Link Link to={'/'}>
                     <img className={classes.logo} src={logo} alt="logo" />
                 </Link>
-                <button className={classes.menu_button} >
-                    <i className="fa-solid fa-bars"></i>
-                </button>
+
             </div>
 
             <div>

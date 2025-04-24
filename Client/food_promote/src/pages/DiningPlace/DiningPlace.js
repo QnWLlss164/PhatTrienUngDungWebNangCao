@@ -54,11 +54,10 @@ export default function DiningPlace() {
                 <img src={Dining_img} alt="dining" />
                 <div>
                     <h1 >
-                        Best Dining Places
+                        Những địa điểm ăn uống tốt nhất
                     </h1>
                     <p>
-                        Find the best spots to enjoy authentic local food. Whether you prefer cozy family-run eateries, bustling steel food, or removed restaurants, we’ve got you covered. Explore our handpicked list of top dining spots and never miss a great food experience!
-                    </p>
+                        Tìm những địa điểm tốt nhất để thưởng thức ẩm thực địa phương đích thực. Cho dù bạn thích các quán ăn do gia đình tự quản ấm cúng, đồ ăn thép nhộn nhịp hay các nhà hàng xa xôi, chúng tôi đều có thể đáp ứng. Khám phá danh sách các địa điểm ăn uống hàng đầu được chúng tôi lựa chọn kỹ lưỡng và không bao giờ bỏ lỡ trải nghiệm ẩm thực tuyệt vời!                    </p>
                     <SearchBar defaultValue={keyword} onSearch={handleSearch} />
                 </div>
             </div>

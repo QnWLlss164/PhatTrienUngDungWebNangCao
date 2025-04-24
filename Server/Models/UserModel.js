@@ -44,11 +44,12 @@ const userSchema = mongoose.Schema(
     },
     avatar: {
       type: String,
-      // required: true,
+      default: "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png",
     },
     thumb: {
       type: String,
-      // required: true,
+      default: "https://e7.pngegg.com/pngimages/504/867/png-clipart-thumb-signal-man-graphy-thumbs-up-hand-photography-thumbnail.png",
+
     },
     role: {
       type: String,

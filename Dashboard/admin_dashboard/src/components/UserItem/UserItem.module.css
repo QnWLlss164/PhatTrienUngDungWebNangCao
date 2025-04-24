@@ -1,5 +1,4 @@
 .box {
-  width: 24%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +14,9 @@
   background-color: #727204;
 }
 .avt {
+  position: relative;
   width: 200px;
+  height: 200px;
   border-radius: 180px;
   transform: translateY(-30%);
   border: 2px solid #fff;
@@ -23,4 +24,65 @@
 
 .container {
   padding-bottom: 30px;
+  position: relative;
+}
+
+.optionWrapper {
+  position: absolute;
+  top: 10px;
+  right: -25%;
+}
+
+.optionButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 99999;
+  overflow: hidden;
+  width: 100px;
+}
+
+.dropdown div {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown div:hover {
+  background-color: #f0f0f0;
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusDot {
+  position: absolute;
+  right: 20%;
+
+  bottom: 15%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.statusDot i {
+  font-size: 26px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

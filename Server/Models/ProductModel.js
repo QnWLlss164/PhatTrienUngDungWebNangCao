@@ -23,6 +23,7 @@ const reviewSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
+
   },
   {
     timestamps: true,
@@ -77,6 +78,10 @@ const productSchema = mongoose.Schema(
       type: Boolean,
       required: true,
       default: true,
+    },
+    views: {
+      type: Number,
+      default: 0
     },
   },
   {

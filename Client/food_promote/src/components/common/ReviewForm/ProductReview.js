@@ -27,7 +27,7 @@ export default function ProductReview({ id, setReviews, setRating }) {
   if (error) return <DataError error={error} />
   return (
     <div>
-      <h3>Review and rating</h3>
+      <h3>Đánh giá và xếp hạng</h3>
       <ReviewForm onSubmit={handleReviewSubmit} />
     </div>
   );

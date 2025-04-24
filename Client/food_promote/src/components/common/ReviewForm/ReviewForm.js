@@ -43,13 +43,13 @@ export default function ReviewForm({ onSubmit }) {
             <textarea
                 className={styles.textarea}
                 rows={4}
-                placeholder="Write an review"
+                placeholder="Viết đánh giá"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
             />
             <p className={styles.error}>{error && error}</p>
             <button type="submit" className={styles.button}>
-                Send
+                Gửi
             </button>
         </form>
     );

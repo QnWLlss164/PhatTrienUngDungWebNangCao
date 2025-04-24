@@ -25,12 +25,11 @@ const HomePage = () => {
 
                 <div className={`${classes.header_content}`}>
                     <h1>
-                        Just Spicing Up Your Journey with Local Delights.
-                    </h1>
+                        Làm chuyến đi của bạn thêm thú vị với những món ăn địa phương.                    </h1>
                     <p>
-                        Our website is your ultimate guide to exploring traditional dishes, hidden street food gems and authentic recipes from across the region. Whether you’re a food lover or a traveler, we bring you close to the heart of our culture through food.
+                        Trang web của chúng tôi là hướng dẫn tuyệt vời nhất để bạn khám phá các món ăn truyền thống, những viên ngọc ẩm thực đường phố ẩn giấu và các công thức nấu ăn đích thực từ khắp khu vực. Cho dù bạn là người yêu thích ẩm thực hay là một du khách, chúng tôi sẽ đưa bạn đến gần hơn với trái tim văn hóa của chúng tôi thông qua ẩm thực.
                     </p>
-                    <Button onClick={handleScroll} effect={true}>Let’s Explore</Button>
+                    <Button onClick={handleScroll} effect={true}>khám phá</Button>
                 </div>
                 <img alt='img' className={classes.header_img} src={header_img} />
             </div>
@@ -39,13 +38,13 @@ const HomePage = () => {
                 <img src={Feature_img} alt="feature" />
                 <div className={classes.feature_content}>
                     <h1>
-                        Featured Local Dishes
+                        Món ăn địa phương đặc sắc
                     </h1>
                     <p>
-                        Explore the signature flavors of out region. From savior street food to exquisite traditional dishes.
+                        Khám phá hương vị đặc trưng của vùng đất chúng tôi. Từ ẩm thực đường phố đến các món ăn truyền thống tinh tế.
                     </p>
                     <Link to='/local-dishes'>
-                        <Button>See more</Button>
+                        <Button>Xem thêm</Button>
                     </Link>
                 </div>
             </div>
@@ -55,13 +54,12 @@ const HomePage = () => {
                 <div className={classes.dining}>
                     <div className={classes.dining_content}>
                         <h1>
-                            Best Dining Places
+                            Những địa điểm ăn uống tốt nhất
                         </h1>
                         <p>
-                            Find the best spots to enjoy authentic local food. Whether you prefer cozy family-run eateries, bustling steel food, or removed restaurants, we’ve got you covered. Explore our handpicked list of top dining spots and never miss a great food experience!
-                        </p>
+                            Tìm những địa điểm tốt nhất để thưởng thức ẩm thực địa phương đích thực. Cho dù bạn thích các quán ăn do gia đình tự quản ấm cúng, đồ ăn thép nhộn nhịp hay các nhà hàng xa xôi, chúng tôi đều có thể đáp ứng. Khám phá danh sách các địa điểm ăn uống hàng đầu được chúng tôi lựa chọn kỹ lưỡng và không bao giờ bỏ lỡ trải nghiệm ẩm thực tuyệt vời!                        </p>
                         <Link to='/dining-places'>
-                            <Button>Explore now</Button>
+                            <Button>Khám phá</Button>
                         </Link>
                     </div>
                     <img src={Dining_img} alt="dining" />
@@ -71,12 +69,12 @@ const HomePage = () => {
                     <img src={blog_img} alt="blog" />
                     <div className={classes.blog_content}>
                         <h1>
-                            Blog & Food Stories
+                            Blog & Câu chuyện ẩm thực
                         </h1>
-                        <p>Beyond taste  discover the culture behind every dish!Food is more than just a meal, it’s a reflection of history, culture and traditions. Read our latest blog posts featuring food stories, seasonal recommendations and festival highlights.</p>
+                        <p>Ngoài hương vị, hãy khám phá nền văn hóa đằng sau mỗi món ăn! Ẩm thực không chỉ là một bữa ăn, mà còn là sự phản ánh của lịch sử, văn hóa và truyền thống. Đọc các bài đăng trên blog mới nhất của chúng tôi có các câu chuyện về ẩm thực, các khuyến nghị theo mùa và các điểm nhấn lễ hội.</p>
                         <Link to='/blogsnnews'>
                             <Button>
-                                See more
+                                Xem thêm
                             </Button>
                         </Link>
                     </div>

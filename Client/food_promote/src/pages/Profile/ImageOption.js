@@ -30,7 +30,8 @@ const ImageOption = ({ imageUrl, label, fieldKey, onUpload, className, children 
         const file = e.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
-            onUpload(fieldKey, imageUrl);
+            onUpload(fieldKey, file);
+
         }
     };
     const handleOptions = (e) => {

@@ -40,41 +40,41 @@ export default function Navbar() {
                         to={NavEnum.HOME}
                         className={handleActive}
                     >
-                        <h4>Home</h4>
+                        <h4>Trang chủ</h4>
                     </NavLink>
                     <NavLink
                         to={NavEnum.LOCAL_DISHES}
                         className={handleActive}
                     >
-                        <h4>Local Dishes</h4>
+                        <h4>Món ăn địa phương</h4>
                     </NavLink>
                     <NavLink
                         to={NavEnum.DINING_PLACES}
                         className={handleActive}
                     >
-                        <h4>Dining Places</h4>
+                        <h4>Địa điểm ăn uống</h4>
                     </NavLink>
                     <NavLink
                         to={NavEnum.BLOGS_AND_NEWS}
                         className={handleActive}
                     >
-                        <h4>Blogs & News</h4>
+                        <h4>Blog & Tin tức</h4>
                     </NavLink>
                 </div>
                 <div className={classes.btn_box}>
                     {!user ? <>
                         <Link to='/signup'>
-                            <Button effect={true}>Signup</Button>
+                            <Button effect={true}>Đăng ký</Button>
                         </Link>
                         <Link to='/login'>
-                            <Button>Login</Button>
+                            <Button>Đăng nhập</Button>
                         </Link></> :
                         <>
                             <div className={classes.info}>
                                 <p>
                                     {user.first_name} {user.last_name}
                                 </p>
-                                <span onClick={HandleSignOut}>sign out</span>
+                                <span onClick={HandleSignOut}>Đăng xuất</span>
                             </div>
                             <Link to='/profile'>
                                 <div style={{

@@ -113,7 +113,7 @@ export default function FoodDetails() {
                 </div>
                 <div className={classes.recomment}>
                     <h1 className={classes.title_recomment}>
-                        More like this food
+                        Những món tương tự
                     </h1>
                     {
                         recomment && recomment.length > 0 ?

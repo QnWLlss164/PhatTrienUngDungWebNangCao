@@ -13,8 +13,20 @@
 .logo {
   height: 50px;
 }
-.header .menu_button {
-  background-color: transparent;
+
+.sidebar_item * {
+  font-weight: 600;
+  font-size: 24px;
+}
+.sidebar {
+  transition: width 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.collapsed {
+  width: 0;
+  /* overflow: hidden; */
 }
 .sidebar_item i {
   color: #7d7c7c;

@@ -4,8 +4,19 @@ import userBaseRestRequest from "./base/rest";
 const restRequest = userBaseRestRequest();
 
 export const RestaurantAPI = {
-    async getAll(token, cb) {
-        await restRequest.get(`restaurants/all`, {}, (err, result) => {
+
+    async getAllName(token, cb) {
+        await restRequest.get(`restaurants/name`, {}, (err, result) => {
+            if (err) return cb(err);
+            if (typeof cb === "function") cb(null, result);
+        }, token);
+    },
+    async getAll(token, { pageNumber, keyword }, cb) {
+        const queryParams = new URLSearchParams();
+        if (pageNumber) queryParams.append("pageNumber", pageNumber);
+        if (keyword) queryParams.append("keyword", keyword);
+        const queryString = queryParams ? `?${queryParams}` : "";
+        await restRequest.get(`restaurants/all${queryString}`, {}, (err, result) => {
             if (err) return cb(err);
             if (typeof cb === "function") cb(null, result);
         }, token);
@@ -18,16 +29,41 @@ export const RestaurantAPI = {
         }, token);
     },
     async createRestaurant(token, payload, cb) {
-        await restRequest.post(`restaurants`, { payload }, (err, result) => {
+        const formData = new FormData();
+        for (const key in payload) {
+            if (payload[key]) {
+                if (key === "image" || key === "thumb") {
+                    formData.append(key, payload[key]); // là File
+                } else {
+                    formData.append(key, payload[key]);
+                }
+            }
+        }
+        await restRequest.post(`restaurants`, formData, (err, result) => {
+            if (err) return cb(err);
+            if (typeof cb === "function") cb(null, result);
+        }, token, true);
+    },
+    async updateRestaurant(token, id, payload, cb) {
+        const formData = new FormData();
+        for (const key in payload) {
+            if (payload[key]) {
+                if (key === "image" || key === "thumb") {
+                    formData.append(key, payload[key]); // là File
+                } else {
+                    formData.append(key, payload[key]);
+                }
+            }
+        }
+        await restRequest.put(`restaurants/${id}`, formData, (err, result) => {
+            if (err) return cb(err);
+            if (typeof cb === "function") cb(null, result);
+        }, token, true);
+    },
+    async getChart(token, cb) {
+        await restRequest.get(`restaurants/chart`, {}, (err, result) => {
             if (err) return cb(err);
             if (typeof cb === "function") cb(null, result);
         }, token);
     },
-    async updateRestaurant(token, id, payload, cb) {
-        await restRequest.put(`restaurants/${id}`, { payload }, (err, result) => {
-            if (err) return cb(err);
-            if (typeof cb === "function") cb(null, result);
-        }, token);
-    }
-
 }

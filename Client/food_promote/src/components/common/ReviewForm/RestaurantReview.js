@@ -28,7 +28,7 @@ export default function RestaurantReview({ id, setReviews, setRating }) {
     if (error) return <DataError error={error} />
     return (
         <div>
-            <h3 className={styles.comment_title}>Review and rating</h3>
+            <h3 className={styles.comment_title}>Đánh giá và xếp hạng</h3>
             <ReviewForm onSubmit={handleReviewSubmit} />
         </div>
     );

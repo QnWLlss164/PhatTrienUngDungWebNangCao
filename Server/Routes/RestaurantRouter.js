@@ -2,8 +2,22 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import Restaurant from "../Models/RestaurantModel.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
+import upload from "../Middleware/Upload.js";
+import { cloudinary } from "../utils/cloudinary.js";
 
 const restaurantRoute = express.Router();
+
+restaurantRoute.get("/chart",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    try {
+      const restaurant = await Restaurant.find({}, "name views");
+      res.json(restaurant)
+    } catch (err) {
+      res.status(500).json({ message: err })
+    }
+  }))
 
 restaurantRoute.get('/search', asyncHandler(async (req, res) => {
   const keyword = req.query.q || "";
@@ -43,6 +57,9 @@ restaurantRoute.get("/top", asyncHandler(async (req, res) => {
     res.status(500).json({ message: "Lỗi server." });
   }
 }))
+
+
+
 // GET ALL RESTAURANT
 restaurantRoute.get(
   "/",
@@ -67,13 +84,42 @@ restaurantRoute.get(
 );
 
 // ADMIN GET ALL RESTAURANT WITHOUT SEARCH AND PEGINATION
+
+restaurantRoute.get("/name",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    const restaurants = await Restaurant.find();
+    if (restaurants) {
+      res.json(restaurants);
+    } else {
+      res.status(404);
+      throw new Error("not Found");
+    }
+  }))
+
 restaurantRoute.get(
   "/all",
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const restaurant = await Restaurant.find({}).sort({ _id: -1 });
-    res.json(restaurant);
+    const limit = 12;
+    const page = Number(req.query.pageNumber) || 1;
+    const skip = (page - 1) * limit;
+    const keyword = req.query.keyword
+      ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+      : {};
+    const count = await Restaurant.countDocuments({ ...keyword });
+    const restaurant = await Restaurant.find({ ...keyword })
+      .limit(limit)
+      .skip(skip)
+      .sort({ _id: -1 });
+    res.json({ restaurant, page, pages: Math.ceil(count / limit) });
   })
 );
 
@@ -81,7 +127,10 @@ restaurantRoute.get(
 restaurantRoute.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const restaurant = await Restaurant.findById(req.params.id);
+    const restaurant = await Restaurant.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 0.5 } },
+      { new: true });;
     if (restaurant) {
       res.json(restaurant);
     } else {
@@ -153,6 +202,10 @@ restaurantRoute.post(
   "/",
   protect,
   admin,
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "thumb", maxCount: 1 },
+  ]),
   asyncHandler(async (req, res) => {
     const {
       name,
@@ -162,16 +215,22 @@ restaurantRoute.post(
       ward,
       street,
       contact,
-      image,
-      thumb,
-      longitude,
-      latitude,
-    } = req.body.payload;
+      location,
+    } = req.body;
+
     const restaurantExist = await Restaurant.findOne({ name });
     if (restaurantExist) {
       res.status(400);
       throw new Error("Restaurant name already exist");
     } else {
+      const imageUpload = req.files?.image?.[0]
+        ? await cloudinary.uploader.upload(req.files.image[0].path)
+        : null;
+
+      const thumbUpload = req.files?.thumb?.[0]
+        ? await cloudinary.uploader.upload(req.files.thumb[0].path)
+        : null;
+
       const restaurant = new Restaurant({
         name,
         description,
@@ -180,11 +239,9 @@ restaurantRoute.post(
         ward,
         street,
         contact,
-        image,
-        thumb,
-        longitude,
-        latitude,
-        user: req.user._id,
+        image: imageUpload?.secure_url || "",
+        thumb: thumbUpload?.secure_url || "",
+        location
       });
       if (restaurant) {
         const createdRestaurant = await restaurant.save();
@@ -202,6 +259,10 @@ restaurantRoute.put(
   "/:id",
   protect,
   admin,
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "thumb", maxCount: 1 },
+  ]),
   asyncHandler(async (req, res) => {
     const {
       name,
@@ -211,11 +272,16 @@ restaurantRoute.put(
       ward,
       street,
       contact,
-      image,
-      thumb,
-      longitude,
-      latitude,
+      location
     } = req.body;
+
+    const imageUpload = req.files?.image?.[0]
+      ? await cloudinary.uploader.upload(req.files.image[0].path)
+      : null;
+
+    const thumbUpload = req.files?.thumb?.[0]
+      ? await cloudinary.uploader.upload(req.files.thumb[0].path)
+      : null;
     const restaurant = await Restaurant.findById(req.params.id);
     if (restaurant) {
       restaurant.name = name || restaurant.name;
@@ -225,10 +291,9 @@ restaurantRoute.put(
       restaurant.ward = ward || restaurant.ward;
       restaurant.street = street || restaurant.street;
       restaurant.contact = contact || restaurant.contact;
-      restaurant.image = image || restaurant.image;
-      restaurant.thumb = thumb || restaurant.thumb;
-      restaurant.longitude = longitude || restaurant.longitude;
-      restaurant.latitude = latitude || restaurant.latitude;
+      if (imageUpload) restaurant.image = imageUpload.secure_url;
+      if (thumbUpload) restaurant.thumb = thumbUpload.secure_url;
+      restaurant.location = location || restaurant.location;
 
       const updatedRestaurant = await restaurant.save();
       res.json(updatedRestaurant);

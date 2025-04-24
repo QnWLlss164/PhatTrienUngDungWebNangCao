@@ -41,7 +41,7 @@ const category = [
     },
     {
         _id: "67fdf3af78d582fa804ca88b",
-        name: "Pizza - BBQ",
+        name: "Pizza - BBQ - Pasta",
         image: "https://img.dominos.vn/Veggie-mania.jpg"
     },
     {
@@ -73,7 +73,13 @@ const category = [
         _id: "67fdf3af78d582fa804ca891",
         name: "Món chiên",
         image: "https://toplist.vn/images/800px/ca-chep-gion-chien-gion-616731.jpg"
-    }
+    },
+    {
+        _id: "67fdf3af78d582fa804ca892",
+        name: "Món khai vị",
+        image: "https://nhahanglangnuongnambo.com//upload/product/z51054868967450713a873bb7c3bc8a4e8b588e6f05d78661-5895.jpg"
+    },
+
 ];
 
 export default category;

@@ -1,35 +1,48 @@
-import React, { useState } from 'react'
-import classes from './InpImage.module.css'
+import React, { useState, useEffect } from 'react';
+import classes from './InpImage.module.css';
 
-export default function InpImage() {
-    const [image, setImage] = useState(null);
-    const [fileName, setFileName] = useState("");
-    // Xử lý khi chọn ảnh
+export default function InpImage({ value, onChange, label }) {
+    const [previewImage, setPreviewImage] = useState('');
+
+    useEffect(() => {
+        if (typeof value === 'string') {
+            setPreviewImage(value);
+        } else if (value instanceof File) {
+            const imageURL = URL.createObjectURL(value);
+            setPreviewImage(imageURL);
+        } else {
+            setPreviewImage('');
+        }
+    }, [value]);
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const imageURL = URL.createObjectURL(file);
-            setFileName(file.name);
-            setImage(imageURL);
+            setPreviewImage(imageURL);
+            onChange(file);
         }
     };
+
     return (
         <div className={classes.container}>
-            <p>Hình ảnh</p>
+            <p>{label ? label : "Hình ảnh"}</p>
 
             <label className={classes.label}>
                 Chọn tệp
-                <input type="file" accept="image/*" onChange={handleFileChange} style={{ display: "none" }} />
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                />
             </label>
 
-            <p className={classes.filename}>{fileName}</p>
-
-            {image && (
+            {previewImage && (
                 <div className={classes.box_img}>
-                    {/* <h4>Ảnh xem trước:</h4> */}
-                    <img className={classes.img} src={image} alt="Preview" />
+                    <img className={classes.img} src={previewImage} alt="Preview" />
                 </div>
             )}
         </div>
-    )
+    );
 }

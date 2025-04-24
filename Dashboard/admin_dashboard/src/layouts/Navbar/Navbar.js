@@ -3,7 +3,7 @@ import classes from './Navbar.module.css'
 import { useUser } from "../../hooks/userContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ collapsed, onToggleSidebar }) {
     const { state, dispatch } = useUser();
     const { user } = state;
     const navigate = useNavigate();
@@ -13,12 +13,10 @@ export default function Navbar() {
         navigate("/login");
     }
     return (
-        <div className={classes.navbar}>
-            <div className={classes.search_box}>
-                <input type="text" placeholder="Search term" />
-                <button><i className="fas fa-search"></i></button>
-            </div>
-
+        <div className={`${classes.navbar} ${collapsed ? classes.collapsed : ''}`}>
+            <button className={classes.menu_button} onClick={onToggleSidebar}>
+                <i className="fa-solid fa-bars"></i>
+            </button>
             <div className={classes.icons}>
 
                 <div className={classes.div_name}>

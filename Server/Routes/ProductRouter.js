@@ -6,7 +6,21 @@ import {
 } from "../Middleware/AuthMiddleware.js";
 import Product from "../Models/ProductModel.js";
 import Restaurant from "../Models/RestaurantModel.js";
+import upload from "../Middleware/Upload.js";
+
 const productRoute = express.Router();
+
+productRoute.get("/chart",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    try {
+      const product = await Product.find({}, "name views");
+      res.json(product)
+    } catch (err) {
+      res.status(500).json({ message: err })
+    }
+  }))
 
 productRoute.get('/search', asyncHandler(async (req, res) => {
   const keyword = req.query.q || ""; // từ khóa tìm kiếm
@@ -67,8 +81,25 @@ productRoute.get(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const products = await Product.find({}).sort({ _id: -1 });
-    res.json(products);
+    const page = Number(req.query.pageNumber) || 1;
+    const limit = 12;
+    const skip = (page - 1) * limit;
+    const keyword = req.query.keyword
+      ? {
+        name: { $regex: req.query.keyword, $options: "i" }, // tìm theo tên sản phẩm, không phân biệt hoa thường
+      }
+      : {};
+    const count = await Product.countDocuments({ ...keyword });
+    const products = await Product.find({ ...keyword })
+      .sort({ _id: -1 })
+      .limit(limit)
+      .skip(skip);
+
+    res.json({
+      products,
+      page,
+      pages: Math.ceil(count / limit),
+    });
   })
 );
 
@@ -77,7 +108,10 @@ productRoute.get(
   "/:id",
   asyncHandler(async (req, res) => {
     try {
-      const product = await Product.findById(req.params.id);
+      const product = await Product.findByIdAndUpdate(
+        req.params.id,
+        { $inc: { views: 0.5 } },
+        { new: true });;
       if (product) {
         const restaurant = await Restaurant.findById(product.restaurant_id);
 
@@ -218,6 +252,7 @@ productRoute.post(
 productRoute.delete(
   "/:id",
   protect,
+  admin,
   asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -234,15 +269,17 @@ productRoute.delete(
 productRoute.post(
   "/",
   protect,
+  admin,
+  upload.single("image"),
   asyncHandler(async (req, res) => {
-    const { name, image, categories_id, menu_id, description, price, unit } =
+    const { name, categories_id, restaurant_id, description, price, unit } =
       req.body;
-
+    const image = req.file?.path;
     const product = new Product({
       name,
       image,
       categories_id,
-      menu_id,
+      restaurant_id,
       description,
       price,
       unit,
@@ -262,15 +299,18 @@ productRoute.post(
 productRoute.put(
   "/:id",
   protect,
+  admin,
+  upload.single("image"),
   asyncHandler(async (req, res) => {
-    const { name, image, categories_id, menu_id, description, price, unit } =
+    const { name, categories_id, restaurant_id, description, price, unit } =
       req.body;
+    const image = req.file?.path;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
       product.image = image || product.image;
       product.categories_id = categories_id || product.categories_id;
-      product.menu_id = menu_id || product.menu_id;
+      product.restaurant_id = restaurant_id || product.restaurant_id;
       product.description = description || product.description;
       product.price = price || product.price;
       product.unit = unit || product.unit;

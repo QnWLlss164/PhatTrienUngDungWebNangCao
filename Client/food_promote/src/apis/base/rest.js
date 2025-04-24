@@ -27,26 +27,32 @@ const userBaseRestRequest = () => {
         }
     };
 
-    const sendRequest = async (method, endpoint, data, cb, token = null) => {
+    const sendRequest = async (method, endpoint, data, cb, token = null, isFormData = false) => {
         const config = {
             method,
             headers: {
-                ...HEADER_CONFIG,
                 ...(token && { Authorization: `Bearer ${token}` })
             },
         };
+
         if (method !== HTTP_METHOD.GET && data) {
-            config.body = JSON.stringify(data);
+            if (isFormData) {
+                config.body = data; // KHÔNG stringify
+            } else {
+                config.headers["Content-Type"] = "application/json";
+                config.body = JSON.stringify(data);
+            }
         }
+
         await fetchAsync(`${baseURL}${endpoint}`, config, cb);
     };
 
     const get = async (endpoint, data, cb, token) =>
         await sendRequest(HTTP_METHOD.GET, endpoint, data, cb, token);
-    const post = async (endpoint, data, cb, token) =>
-        await sendRequest(HTTP_METHOD.POST, endpoint, data, cb, token);
-    const put = async (endpoint, data, cb, token) =>
-        await sendRequest(HTTP_METHOD.PUT, endpoint, data, cb, token);
+    const post = async (endpoint, data, cb, token, isFormData = false) =>
+        await sendRequest(HTTP_METHOD.POST, endpoint, data, cb, token, isFormData);
+    const put = async (endpoint, data, cb, token, isFormData = false) =>
+        await sendRequest(HTTP_METHOD.PUT, endpoint, data, cb, token, isFormData);
     const del = async (endpoint, data, cb, token) =>
         await sendRequest(HTTP_METHOD.DELETE, endpoint, data, cb, token);
 

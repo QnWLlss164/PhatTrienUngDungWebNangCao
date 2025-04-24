@@ -6,15 +6,20 @@ import { LoaderProvider } from './hooks/LoaderContext';
 import Loader from './components/Loader/Loader';
 import { UserProvider } from './hooks/userContext';
 import { ToastProvider } from './hooks/ToastContext'
+import 'react-quill/dist/quill.snow.css';
+import ToastContainer from './components/Toast/ToastContainer';
 function App() {
   return (
     <UserProvider>
-      <LoaderProvider>
-        <Loader />
-        <React.StrictMode>
-          <RouterProvider router={Router} />
-        </React.StrictMode>
-      </LoaderProvider>
+      <ToastProvider>
+        <LoaderProvider>
+          <Loader />
+          <React.StrictMode>
+            <RouterProvider router={Router} />
+          </React.StrictMode>
+        </LoaderProvider>
+        <ToastContainer />
+      </ToastProvider>
     </UserProvider>
   );
 }

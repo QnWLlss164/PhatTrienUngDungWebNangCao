@@ -24,7 +24,7 @@ export default function Restaurantfav(props) {
             }} className={classes.item_content}>
                 <div style={{
                     backgroundImage: `url(${image})`,
-                    backgroundSize: "cover",
+                    backgroundSize: "contain",
                     backgroundPosition: "center",
 
                 }}

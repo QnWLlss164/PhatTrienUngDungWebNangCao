@@ -5,6 +5,8 @@
   padding-top: 30px;
 }
 .item_img {
+  background-color: #fff;
+  background-repeat: no-repeat;
   position: absolute;
   top: -30px;
   right: 20px;

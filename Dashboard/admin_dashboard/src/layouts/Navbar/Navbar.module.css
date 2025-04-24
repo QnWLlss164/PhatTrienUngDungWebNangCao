@@ -15,6 +15,16 @@
 .navbar * {
   color: #f0f0f0;
 }
+.navbar {
+  transition: left 0.3s ease;
+}
+.collapsed {
+  left: 0;
+}
+.navbar .menu_button {
+  cursor: pointer;
+  background-color: transparent;
+}
 .search_box {
   position: relative;
   width: 60%;

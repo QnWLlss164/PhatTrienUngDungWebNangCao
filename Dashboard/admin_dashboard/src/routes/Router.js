@@ -8,11 +8,16 @@ import Food from '../features/Food/Food';
 import Post from '../features/Post/Post';
 import Login from '../pages/Login/Login';
 import AdminRoute from '../layouts/AdminRoute';
+import Chart from '../features/Chart/Chart';
 const Router = createBrowserRouter([
     {
         path: "/",
         element: (<AdminRoute><HomePage /></AdminRoute>),
         children: [
+            {
+                path: "/",
+                element: <Chart />,
+            },
             {
                 path: "/categories",
                 element: <Category />,

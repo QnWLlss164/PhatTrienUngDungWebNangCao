@@ -33,7 +33,7 @@ export default function Footer() {
                                     <p>Dining Places</p>
                                 </Link>
                                 <Link to={NavEnum.BLOGS_AND_NEWS}>
-                                    <p>Blog & Food Stories</p>
+                                    <p>Blog & Câu chuyện ẩm thực</p>
                                 </Link>
                             </div>
                         </div>
